@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon -e ts -w ./src -x ts-node ./src/index.ts"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.8",
+    "ts-node": "^7.0.1",
+    "tslint-config-airbnb": "^5.11.1",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "graphql-yoga": "^1.16.7",
+    "prisma-client-lib": "^1.22.2"
+  }
+}
