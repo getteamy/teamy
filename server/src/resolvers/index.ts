@@ -5,13 +5,10 @@ export default {
         }
     },
     Mutation: {
-        createDraft(root, args, context) {
-            return context.prisma.createPost(
+        createUser(root, args, context) {
+            return context.prisma.createUser(
                 {
-                    title: args.title,
-                    author: {
-                        connect: { id: args.userId }
-                    }
+                    email: args.email,
                 }
             )
         }
