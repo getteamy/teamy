@@ -4,11 +4,11 @@ type Mutation {
     createUser(email: String, skills: [Skill!]) : User!
     createTeam(name: String!, users: [ID!]!, lead: ID!, workspace: ID!, dateRange: String) : Team!
     removeTeam(id: ID!) : Team!
-    createSkill(name: String!, users: [User!]!)
-    removeSkill(id: ID!)
-    createWorkspace(name: String!, administrators: [ID!]!)
-    updateWorkspace(name: String, users: [ID!], administrators: [ID!], teams: [ID!])
-    removeWorkspace(id: ID!)
+    createSkill(name: String!, users: [User!]!) : Skill!
+    removeSkill(id: ID!) : Skill!
+    createWorkspace(name: String!, administrators: [ID!]!) : Workspace!
+    updateWorkspace(name: String, users: [ID!], administrators: [ID!], teams: [ID!]) : Workspace!
+    removeWorkspace(id: ID!) : Workspace!
 }
 
 type Query {
