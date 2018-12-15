@@ -5,8 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon -e ts -w ./src -x ts-node ./src/index.ts",
-    "prisma": "prisma deploy && prisma generate",
-    "schema": "graphql get-schema --project prisma"
+    "generate:client": "prisma deploy && prisma generate",
+    "generate:schema": "graphql get-schema --project prisma",
+    "generate": "yarn generate:client && yarn generate:schema"
   },
   "devDependencies": {
     "nodemon": "^1.18.8",
