@@ -4,7 +4,7 @@ type Mutation {
     createUser(email: String, skills: [String!]) : User!
     createTeam(name: String!, users: [ID!]!, lead: ID!, workspace: ID!, dateRange: String) : Team!
     removeTeam(id: ID!) : Team!
-    createWorkspace(name: String!, administrators: [ID!]!) : Workspace!
+    createWorkspace(name: String!, administrator: ID!) : Workspace!
     updateWorkspace(name: String, users: [ID!], administrators: [ID!], teams: [ID!]) : Workspace!
     removeWorkspace(id: ID!) : Workspace!
 }
