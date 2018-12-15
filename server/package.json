@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon -e ts -w ./src -x ts-node ./src/index.ts",
     "prisma": "prisma deploy && prisma generate",
-    "schema:generate": "graphql get-schema --project prisma"
+    "schema": "graphql get-schema --project prisma"
   },
   "devDependencies": {
     "nodemon": "^1.18.8",
