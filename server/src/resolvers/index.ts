@@ -1,3 +1,5 @@
+import { prisma } from "../generated/prisma-client";
+
 export default {
     Query: {
         user(root, args, context) {
@@ -9,18 +11,23 @@ export default {
             return context.prisma.createUser(
                 {
                     email: args.email,
+                    skills: {
+                        create: args.skills.map(skill => ({name : skill}))
+                    }
                 }
 
             )
         },
+    },
+    User: {
+        skills(parent) {
+            return prisma.user({id: parent.id}).skills()
+        }
+    },
 
-        createSkill(root, args, context) {
-            return context.prisma.createSkill(
-                {
-                    name: args.name,
-                    users: args.users,
-                }
-            )
+    Skill: {
+        users(parent) {
+            return prisma.skill({name: parent.name}).users()
         }
     }
 }
