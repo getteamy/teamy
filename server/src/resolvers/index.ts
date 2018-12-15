@@ -18,6 +18,18 @@ export default {
 
             )
         },
+        createWorkspace(root, args, context) {
+            return context.prisma.createWorkspace(
+                {
+                    name: args.name,
+                    administrator: {
+                        connect: {
+                            id: args.administrator
+                        }
+                    },
+                }
+            )
+        }
     },
     User: {
         skills(parent) {
