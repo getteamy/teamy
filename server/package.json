@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon -e ts -w ./src -x ts-node ./src/index.ts"
+    "start": "nodemon -e ts -w ./src -x ts-node ./src/index.ts",
+    "schema": "graphql get-schema --project prisma"
   },
   "devDependencies": {
     "nodemon": "^1.18.8",
