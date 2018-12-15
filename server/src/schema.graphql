@@ -1,11 +1,11 @@
 # import * from "./generated/prisma.graphql"
 
 type Mutation {
-    createUser(email: String, skills: [Skill!]) : User!
+    createUser(email: String, skills: [ID!]) : User!
     createTeam(name: String!, users: [ID!]!, lead: ID!, workspace: ID!, dateRange: String) : Team!
     removeTeam(id: ID!) : Team!
-    createSkill(name: String!, users: [User!]!) : Skill!
-    removeSkill(id: ID!) : Skill!
+    createSkill(name: String!, users: [ID!]!) : Skill!
+    removeSkill(id: ID!) : ID!
     createWorkspace(name: String!, administrators: [ID!]!) : Workspace!
     updateWorkspace(name: String, users: [ID!], administrators: [ID!], teams: [ID!]) : Workspace!
     removeWorkspace(id: ID!) : Workspace!
