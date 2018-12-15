@@ -1,0 +1,1826 @@
+# source: http://localhost:4466
+# timestamp: Sat Dec 15 2018 14:26:44 GMT+0100 (Central European Standard Time)
+
+type AggregateSkill {
+  count: Int!
+}
+
+type AggregateTeam {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type AggregateWorkspace {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  createWorkspace(data: WorkspaceCreateInput!): Workspace!
+  createSkill(data: SkillCreateInput!): Skill!
+  createTeam(data: TeamCreateInput!): Team!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateWorkspace(data: WorkspaceUpdateInput!, where: WorkspaceWhereUniqueInput!): Workspace
+  updateSkill(data: SkillUpdateInput!, where: SkillWhereUniqueInput!): Skill
+  updateTeam(data: TeamUpdateInput!, where: TeamWhereUniqueInput!): Team
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteWorkspace(where: WorkspaceWhereUniqueInput!): Workspace
+  deleteSkill(where: SkillWhereUniqueInput!): Skill
+  deleteTeam(where: TeamWhereUniqueInput!): Team
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertWorkspace(where: WorkspaceWhereUniqueInput!, create: WorkspaceCreateInput!, update: WorkspaceUpdateInput!): Workspace!
+  upsertSkill(where: SkillWhereUniqueInput!, create: SkillCreateInput!, update: SkillUpdateInput!): Skill!
+  upsertTeam(where: TeamWhereUniqueInput!, create: TeamCreateInput!, update: TeamUpdateInput!): Team!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyWorkspaces(data: WorkspaceUpdateManyMutationInput!, where: WorkspaceWhereInput): BatchPayload!
+  updateManySkills(data: SkillUpdateManyMutationInput!, where: SkillWhereInput): BatchPayload!
+  updateManyTeams(data: TeamUpdateManyMutationInput!, where: TeamWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyWorkspaces(where: WorkspaceWhereInput): BatchPayload!
+  deleteManySkills(where: SkillWhereInput): BatchPayload!
+  deleteManyTeams(where: TeamWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  workspaces(where: WorkspaceWhereInput, orderBy: WorkspaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Workspace]!
+  skills(where: SkillWhereInput, orderBy: SkillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Skill]!
+  teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team]!
+  user(where: UserWhereUniqueInput!): User
+  workspace(where: WorkspaceWhereUniqueInput!): Workspace
+  skill(where: SkillWhereUniqueInput!): Skill
+  team(where: TeamWhereUniqueInput!): Team
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  workspacesConnection(where: WorkspaceWhereInput, orderBy: WorkspaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WorkspaceConnection!
+  skillsConnection(where: SkillWhereInput, orderBy: SkillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SkillConnection!
+  teamsConnection(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Skill implements Node {
+  id: ID!
+  name: String!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+}
+
+"""A connection to a list of items."""
+type SkillConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SkillEdge]!
+  aggregate: AggregateSkill!
+}
+
+input SkillCreateInput {
+  name: String!
+  users: UserCreateManyWithoutSkillsInput
+}
+
+input SkillCreateManyWithoutUsersInput {
+  create: [SkillCreateWithoutUsersInput!]
+  connect: [SkillWhereUniqueInput!]
+}
+
+input SkillCreateWithoutUsersInput {
+  name: String!
+}
+
+"""An edge in a connection."""
+type SkillEdge {
+  """The item at the end of the edge."""
+  node: Skill!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SkillOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type SkillPreviousValues {
+  id: ID!
+  name: String!
+}
+
+input SkillScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SkillScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SkillScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SkillScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+type SkillSubscriptionPayload {
+  mutation: MutationType!
+  node: Skill
+  updatedFields: [String!]
+  previousValues: SkillPreviousValues
+}
+
+input SkillSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SkillSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SkillSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SkillSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SkillWhereInput
+}
+
+input SkillUpdateInput {
+  name: String
+  users: UserUpdateManyWithoutSkillsInput
+}
+
+input SkillUpdateManyDataInput {
+  name: String
+}
+
+input SkillUpdateManyMutationInput {
+  name: String
+}
+
+input SkillUpdateManyWithoutUsersInput {
+  create: [SkillCreateWithoutUsersInput!]
+  connect: [SkillWhereUniqueInput!]
+  disconnect: [SkillWhereUniqueInput!]
+  delete: [SkillWhereUniqueInput!]
+  update: [SkillUpdateWithWhereUniqueWithoutUsersInput!]
+  updateMany: [SkillUpdateManyWithWhereNestedInput!]
+  deleteMany: [SkillScalarWhereInput!]
+  upsert: [SkillUpsertWithWhereUniqueWithoutUsersInput!]
+}
+
+input SkillUpdateManyWithWhereNestedInput {
+  where: SkillScalarWhereInput!
+  data: SkillUpdateManyDataInput!
+}
+
+input SkillUpdateWithoutUsersDataInput {
+  name: String
+}
+
+input SkillUpdateWithWhereUniqueWithoutUsersInput {
+  where: SkillWhereUniqueInput!
+  data: SkillUpdateWithoutUsersDataInput!
+}
+
+input SkillUpsertWithWhereUniqueWithoutUsersInput {
+  where: SkillWhereUniqueInput!
+  update: SkillUpdateWithoutUsersDataInput!
+  create: SkillCreateWithoutUsersInput!
+}
+
+input SkillWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SkillWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SkillWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SkillWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  users_every: UserWhereInput
+  users_some: UserWhereInput
+  users_none: UserWhereInput
+}
+
+input SkillWhereUniqueInput {
+  id: ID
+}
+
+type Subscription {
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  workspace(where: WorkspaceSubscriptionWhereInput): WorkspaceSubscriptionPayload
+  skill(where: SkillSubscriptionWhereInput): SkillSubscriptionPayload
+  team(where: TeamSubscriptionWhereInput): TeamSubscriptionPayload
+}
+
+type Team implements Node {
+  id: ID!
+  name: String!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  lead: User!
+  dateRange: String
+}
+
+"""A connection to a list of items."""
+type TeamConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [TeamEdge]!
+  aggregate: AggregateTeam!
+}
+
+input TeamCreateInput {
+  name: String!
+  dateRange: String
+  users: UserCreateManyWithoutTeamsInput
+  lead: UserCreateOneWithoutLedTeamsInput!
+}
+
+input TeamCreateManyInput {
+  create: [TeamCreateInput!]
+  connect: [TeamWhereUniqueInput!]
+}
+
+input TeamCreateManyWithoutLeadInput {
+  create: [TeamCreateWithoutLeadInput!]
+  connect: [TeamWhereUniqueInput!]
+}
+
+input TeamCreateManyWithoutUsersInput {
+  create: [TeamCreateWithoutUsersInput!]
+  connect: [TeamWhereUniqueInput!]
+}
+
+input TeamCreateWithoutLeadInput {
+  name: String!
+  dateRange: String
+  users: UserCreateManyWithoutTeamsInput
+}
+
+input TeamCreateWithoutUsersInput {
+  name: String!
+  dateRange: String
+  lead: UserCreateOneWithoutLedTeamsInput!
+}
+
+"""An edge in a connection."""
+type TeamEdge {
+  """The item at the end of the edge."""
+  node: Team!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum TeamOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  dateRange_ASC
+  dateRange_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type TeamPreviousValues {
+  id: ID!
+  name: String!
+  dateRange: String
+}
+
+input TeamScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TeamScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TeamScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TeamScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  dateRange: String
+
+  """All values that are not equal to given value."""
+  dateRange_not: String
+
+  """All values that are contained in given list."""
+  dateRange_in: [String!]
+
+  """All values that are not contained in given list."""
+  dateRange_not_in: [String!]
+
+  """All values less than the given value."""
+  dateRange_lt: String
+
+  """All values less than or equal the given value."""
+  dateRange_lte: String
+
+  """All values greater than the given value."""
+  dateRange_gt: String
+
+  """All values greater than or equal the given value."""
+  dateRange_gte: String
+
+  """All values containing the given string."""
+  dateRange_contains: String
+
+  """All values not containing the given string."""
+  dateRange_not_contains: String
+
+  """All values starting with the given string."""
+  dateRange_starts_with: String
+
+  """All values not starting with the given string."""
+  dateRange_not_starts_with: String
+
+  """All values ending with the given string."""
+  dateRange_ends_with: String
+
+  """All values not ending with the given string."""
+  dateRange_not_ends_with: String
+}
+
+type TeamSubscriptionPayload {
+  mutation: MutationType!
+  node: Team
+  updatedFields: [String!]
+  previousValues: TeamPreviousValues
+}
+
+input TeamSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TeamSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TeamSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TeamSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: TeamWhereInput
+}
+
+input TeamUpdateDataInput {
+  name: String
+  dateRange: String
+  users: UserUpdateManyWithoutTeamsInput
+  lead: UserUpdateOneRequiredWithoutLedTeamsInput
+}
+
+input TeamUpdateInput {
+  name: String
+  dateRange: String
+  users: UserUpdateManyWithoutTeamsInput
+  lead: UserUpdateOneRequiredWithoutLedTeamsInput
+}
+
+input TeamUpdateManyDataInput {
+  name: String
+  dateRange: String
+}
+
+input TeamUpdateManyInput {
+  create: [TeamCreateInput!]
+  connect: [TeamWhereUniqueInput!]
+  disconnect: [TeamWhereUniqueInput!]
+  delete: [TeamWhereUniqueInput!]
+  update: [TeamUpdateWithWhereUniqueNestedInput!]
+  updateMany: [TeamUpdateManyWithWhereNestedInput!]
+  deleteMany: [TeamScalarWhereInput!]
+  upsert: [TeamUpsertWithWhereUniqueNestedInput!]
+}
+
+input TeamUpdateManyMutationInput {
+  name: String
+  dateRange: String
+}
+
+input TeamUpdateManyWithoutLeadInput {
+  create: [TeamCreateWithoutLeadInput!]
+  connect: [TeamWhereUniqueInput!]
+  disconnect: [TeamWhereUniqueInput!]
+  delete: [TeamWhereUniqueInput!]
+  update: [TeamUpdateWithWhereUniqueWithoutLeadInput!]
+  updateMany: [TeamUpdateManyWithWhereNestedInput!]
+  deleteMany: [TeamScalarWhereInput!]
+  upsert: [TeamUpsertWithWhereUniqueWithoutLeadInput!]
+}
+
+input TeamUpdateManyWithoutUsersInput {
+  create: [TeamCreateWithoutUsersInput!]
+  connect: [TeamWhereUniqueInput!]
+  disconnect: [TeamWhereUniqueInput!]
+  delete: [TeamWhereUniqueInput!]
+  update: [TeamUpdateWithWhereUniqueWithoutUsersInput!]
+  updateMany: [TeamUpdateManyWithWhereNestedInput!]
+  deleteMany: [TeamScalarWhereInput!]
+  upsert: [TeamUpsertWithWhereUniqueWithoutUsersInput!]
+}
+
+input TeamUpdateManyWithWhereNestedInput {
+  where: TeamScalarWhereInput!
+  data: TeamUpdateManyDataInput!
+}
+
+input TeamUpdateWithoutLeadDataInput {
+  name: String
+  dateRange: String
+  users: UserUpdateManyWithoutTeamsInput
+}
+
+input TeamUpdateWithoutUsersDataInput {
+  name: String
+  dateRange: String
+  lead: UserUpdateOneRequiredWithoutLedTeamsInput
+}
+
+input TeamUpdateWithWhereUniqueNestedInput {
+  where: TeamWhereUniqueInput!
+  data: TeamUpdateDataInput!
+}
+
+input TeamUpdateWithWhereUniqueWithoutLeadInput {
+  where: TeamWhereUniqueInput!
+  data: TeamUpdateWithoutLeadDataInput!
+}
+
+input TeamUpdateWithWhereUniqueWithoutUsersInput {
+  where: TeamWhereUniqueInput!
+  data: TeamUpdateWithoutUsersDataInput!
+}
+
+input TeamUpsertWithWhereUniqueNestedInput {
+  where: TeamWhereUniqueInput!
+  update: TeamUpdateDataInput!
+  create: TeamCreateInput!
+}
+
+input TeamUpsertWithWhereUniqueWithoutLeadInput {
+  where: TeamWhereUniqueInput!
+  update: TeamUpdateWithoutLeadDataInput!
+  create: TeamCreateWithoutLeadInput!
+}
+
+input TeamUpsertWithWhereUniqueWithoutUsersInput {
+  where: TeamWhereUniqueInput!
+  update: TeamUpdateWithoutUsersDataInput!
+  create: TeamCreateWithoutUsersInput!
+}
+
+input TeamWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TeamWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TeamWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TeamWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  dateRange: String
+
+  """All values that are not equal to given value."""
+  dateRange_not: String
+
+  """All values that are contained in given list."""
+  dateRange_in: [String!]
+
+  """All values that are not contained in given list."""
+  dateRange_not_in: [String!]
+
+  """All values less than the given value."""
+  dateRange_lt: String
+
+  """All values less than or equal the given value."""
+  dateRange_lte: String
+
+  """All values greater than the given value."""
+  dateRange_gt: String
+
+  """All values greater than or equal the given value."""
+  dateRange_gte: String
+
+  """All values containing the given string."""
+  dateRange_contains: String
+
+  """All values not containing the given string."""
+  dateRange_not_contains: String
+
+  """All values starting with the given string."""
+  dateRange_starts_with: String
+
+  """All values not starting with the given string."""
+  dateRange_not_starts_with: String
+
+  """All values ending with the given string."""
+  dateRange_ends_with: String
+
+  """All values not ending with the given string."""
+  dateRange_not_ends_with: String
+  users_every: UserWhereInput
+  users_some: UserWhereInput
+  users_none: UserWhereInput
+  lead: UserWhereInput
+}
+
+input TeamWhereUniqueInput {
+  id: ID
+}
+
+type User implements Node {
+  id: ID!
+  email: String!
+  workspaces(where: WorkspaceWhereInput, orderBy: WorkspaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Workspace!]
+  ownedWorkspaces(where: WorkspaceWhereInput, orderBy: WorkspaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Workspace!]
+  skills(where: SkillWhereInput, orderBy: SkillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Skill!]
+  teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
+  ledTeams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  email: String!
+  workspaces: WorkspaceCreateManyWithoutUsersInput
+  ownedWorkspaces: WorkspaceCreateManyWithoutAdministratorInput
+  skills: SkillCreateManyWithoutUsersInput
+  teams: TeamCreateManyWithoutUsersInput
+  ledTeams: TeamCreateManyWithoutLeadInput
+}
+
+input UserCreateManyWithoutSkillsInput {
+  create: [UserCreateWithoutSkillsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutTeamsInput {
+  create: [UserCreateWithoutTeamsInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutWorkspacesInput {
+  create: [UserCreateWithoutWorkspacesInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateOneWithoutLedTeamsInput {
+  create: UserCreateWithoutLedTeamsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutOwnedWorkspacesInput {
+  create: UserCreateWithoutOwnedWorkspacesInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutLedTeamsInput {
+  email: String!
+  workspaces: WorkspaceCreateManyWithoutUsersInput
+  ownedWorkspaces: WorkspaceCreateManyWithoutAdministratorInput
+  skills: SkillCreateManyWithoutUsersInput
+  teams: TeamCreateManyWithoutUsersInput
+}
+
+input UserCreateWithoutOwnedWorkspacesInput {
+  email: String!
+  workspaces: WorkspaceCreateManyWithoutUsersInput
+  skills: SkillCreateManyWithoutUsersInput
+  teams: TeamCreateManyWithoutUsersInput
+  ledTeams: TeamCreateManyWithoutLeadInput
+}
+
+input UserCreateWithoutSkillsInput {
+  email: String!
+  workspaces: WorkspaceCreateManyWithoutUsersInput
+  ownedWorkspaces: WorkspaceCreateManyWithoutAdministratorInput
+  teams: TeamCreateManyWithoutUsersInput
+  ledTeams: TeamCreateManyWithoutLeadInput
+}
+
+input UserCreateWithoutTeamsInput {
+  email: String!
+  workspaces: WorkspaceCreateManyWithoutUsersInput
+  ownedWorkspaces: WorkspaceCreateManyWithoutAdministratorInput
+  skills: SkillCreateManyWithoutUsersInput
+  ledTeams: TeamCreateManyWithoutLeadInput
+}
+
+input UserCreateWithoutWorkspacesInput {
+  email: String!
+  ownedWorkspaces: WorkspaceCreateManyWithoutAdministratorInput
+  skills: SkillCreateManyWithoutUsersInput
+  teams: TeamCreateManyWithoutUsersInput
+  ledTeams: TeamCreateManyWithoutLeadInput
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge."""
+  node: User!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  email_ASC
+  email_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  email: String!
+}
+
+input UserScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserUpdateInput {
+  email: String
+  workspaces: WorkspaceUpdateManyWithoutUsersInput
+  ownedWorkspaces: WorkspaceUpdateManyWithoutAdministratorInput
+  skills: SkillUpdateManyWithoutUsersInput
+  teams: TeamUpdateManyWithoutUsersInput
+  ledTeams: TeamUpdateManyWithoutLeadInput
+}
+
+input UserUpdateManyDataInput {
+  email: String
+}
+
+input UserUpdateManyMutationInput {
+  email: String
+}
+
+input UserUpdateManyWithoutSkillsInput {
+  create: [UserCreateWithoutSkillsInput!]
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutSkillsInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserScalarWhereInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutSkillsInput!]
+}
+
+input UserUpdateManyWithoutTeamsInput {
+  create: [UserCreateWithoutTeamsInput!]
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutTeamsInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserScalarWhereInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutTeamsInput!]
+}
+
+input UserUpdateManyWithoutWorkspacesInput {
+  create: [UserCreateWithoutWorkspacesInput!]
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutWorkspacesInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserScalarWhereInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutWorkspacesInput!]
+}
+
+input UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyDataInput!
+}
+
+input UserUpdateOneRequiredWithoutLedTeamsInput {
+  create: UserCreateWithoutLedTeamsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutLedTeamsDataInput
+  upsert: UserUpsertWithoutLedTeamsInput
+}
+
+input UserUpdateOneRequiredWithoutOwnedWorkspacesInput {
+  create: UserCreateWithoutOwnedWorkspacesInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutOwnedWorkspacesDataInput
+  upsert: UserUpsertWithoutOwnedWorkspacesInput
+}
+
+input UserUpdateWithoutLedTeamsDataInput {
+  email: String
+  workspaces: WorkspaceUpdateManyWithoutUsersInput
+  ownedWorkspaces: WorkspaceUpdateManyWithoutAdministratorInput
+  skills: SkillUpdateManyWithoutUsersInput
+  teams: TeamUpdateManyWithoutUsersInput
+}
+
+input UserUpdateWithoutOwnedWorkspacesDataInput {
+  email: String
+  workspaces: WorkspaceUpdateManyWithoutUsersInput
+  skills: SkillUpdateManyWithoutUsersInput
+  teams: TeamUpdateManyWithoutUsersInput
+  ledTeams: TeamUpdateManyWithoutLeadInput
+}
+
+input UserUpdateWithoutSkillsDataInput {
+  email: String
+  workspaces: WorkspaceUpdateManyWithoutUsersInput
+  ownedWorkspaces: WorkspaceUpdateManyWithoutAdministratorInput
+  teams: TeamUpdateManyWithoutUsersInput
+  ledTeams: TeamUpdateManyWithoutLeadInput
+}
+
+input UserUpdateWithoutTeamsDataInput {
+  email: String
+  workspaces: WorkspaceUpdateManyWithoutUsersInput
+  ownedWorkspaces: WorkspaceUpdateManyWithoutAdministratorInput
+  skills: SkillUpdateManyWithoutUsersInput
+  ledTeams: TeamUpdateManyWithoutLeadInput
+}
+
+input UserUpdateWithoutWorkspacesDataInput {
+  email: String
+  ownedWorkspaces: WorkspaceUpdateManyWithoutAdministratorInput
+  skills: SkillUpdateManyWithoutUsersInput
+  teams: TeamUpdateManyWithoutUsersInput
+  ledTeams: TeamUpdateManyWithoutLeadInput
+}
+
+input UserUpdateWithWhereUniqueWithoutSkillsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutSkillsDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutTeamsInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutTeamsDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutWorkspacesInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutWorkspacesDataInput!
+}
+
+input UserUpsertWithoutLedTeamsInput {
+  update: UserUpdateWithoutLedTeamsDataInput!
+  create: UserCreateWithoutLedTeamsInput!
+}
+
+input UserUpsertWithoutOwnedWorkspacesInput {
+  update: UserUpdateWithoutOwnedWorkspacesDataInput!
+  create: UserCreateWithoutOwnedWorkspacesInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutSkillsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutSkillsDataInput!
+  create: UserCreateWithoutSkillsInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutTeamsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutTeamsDataInput!
+  create: UserCreateWithoutTeamsInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutWorkspacesInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutWorkspacesDataInput!
+  create: UserCreateWithoutWorkspacesInput!
+}
+
+input UserWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  workspaces_every: WorkspaceWhereInput
+  workspaces_some: WorkspaceWhereInput
+  workspaces_none: WorkspaceWhereInput
+  ownedWorkspaces_every: WorkspaceWhereInput
+  ownedWorkspaces_some: WorkspaceWhereInput
+  ownedWorkspaces_none: WorkspaceWhereInput
+  skills_every: SkillWhereInput
+  skills_some: SkillWhereInput
+  skills_none: SkillWhereInput
+  teams_every: TeamWhereInput
+  teams_some: TeamWhereInput
+  teams_none: TeamWhereInput
+  ledTeams_every: TeamWhereInput
+  ledTeams_some: TeamWhereInput
+  ledTeams_none: TeamWhereInput
+}
+
+input UserWhereUniqueInput {
+  id: ID
+}
+
+type Workspace implements Node {
+  id: ID!
+  name: String!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  administrator: User!
+  teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
+}
+
+"""A connection to a list of items."""
+type WorkspaceConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [WorkspaceEdge]!
+  aggregate: AggregateWorkspace!
+}
+
+input WorkspaceCreateInput {
+  name: String!
+  users: UserCreateManyWithoutWorkspacesInput
+  administrator: UserCreateOneWithoutOwnedWorkspacesInput!
+  teams: TeamCreateManyInput
+}
+
+input WorkspaceCreateManyWithoutAdministratorInput {
+  create: [WorkspaceCreateWithoutAdministratorInput!]
+  connect: [WorkspaceWhereUniqueInput!]
+}
+
+input WorkspaceCreateManyWithoutUsersInput {
+  create: [WorkspaceCreateWithoutUsersInput!]
+  connect: [WorkspaceWhereUniqueInput!]
+}
+
+input WorkspaceCreateWithoutAdministratorInput {
+  name: String!
+  users: UserCreateManyWithoutWorkspacesInput
+  teams: TeamCreateManyInput
+}
+
+input WorkspaceCreateWithoutUsersInput {
+  name: String!
+  administrator: UserCreateOneWithoutOwnedWorkspacesInput!
+  teams: TeamCreateManyInput
+}
+
+"""An edge in a connection."""
+type WorkspaceEdge {
+  """The item at the end of the edge."""
+  node: Workspace!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum WorkspaceOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type WorkspacePreviousValues {
+  id: ID!
+  name: String!
+}
+
+input WorkspaceScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [WorkspaceScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [WorkspaceScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [WorkspaceScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+type WorkspaceSubscriptionPayload {
+  mutation: MutationType!
+  node: Workspace
+  updatedFields: [String!]
+  previousValues: WorkspacePreviousValues
+}
+
+input WorkspaceSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [WorkspaceSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [WorkspaceSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [WorkspaceSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: WorkspaceWhereInput
+}
+
+input WorkspaceUpdateInput {
+  name: String
+  users: UserUpdateManyWithoutWorkspacesInput
+  administrator: UserUpdateOneRequiredWithoutOwnedWorkspacesInput
+  teams: TeamUpdateManyInput
+}
+
+input WorkspaceUpdateManyDataInput {
+  name: String
+}
+
+input WorkspaceUpdateManyMutationInput {
+  name: String
+}
+
+input WorkspaceUpdateManyWithoutAdministratorInput {
+  create: [WorkspaceCreateWithoutAdministratorInput!]
+  connect: [WorkspaceWhereUniqueInput!]
+  disconnect: [WorkspaceWhereUniqueInput!]
+  delete: [WorkspaceWhereUniqueInput!]
+  update: [WorkspaceUpdateWithWhereUniqueWithoutAdministratorInput!]
+  updateMany: [WorkspaceUpdateManyWithWhereNestedInput!]
+  deleteMany: [WorkspaceScalarWhereInput!]
+  upsert: [WorkspaceUpsertWithWhereUniqueWithoutAdministratorInput!]
+}
+
+input WorkspaceUpdateManyWithoutUsersInput {
+  create: [WorkspaceCreateWithoutUsersInput!]
+  connect: [WorkspaceWhereUniqueInput!]
+  disconnect: [WorkspaceWhereUniqueInput!]
+  delete: [WorkspaceWhereUniqueInput!]
+  update: [WorkspaceUpdateWithWhereUniqueWithoutUsersInput!]
+  updateMany: [WorkspaceUpdateManyWithWhereNestedInput!]
+  deleteMany: [WorkspaceScalarWhereInput!]
+  upsert: [WorkspaceUpsertWithWhereUniqueWithoutUsersInput!]
+}
+
+input WorkspaceUpdateManyWithWhereNestedInput {
+  where: WorkspaceScalarWhereInput!
+  data: WorkspaceUpdateManyDataInput!
+}
+
+input WorkspaceUpdateWithoutAdministratorDataInput {
+  name: String
+  users: UserUpdateManyWithoutWorkspacesInput
+  teams: TeamUpdateManyInput
+}
+
+input WorkspaceUpdateWithoutUsersDataInput {
+  name: String
+  administrator: UserUpdateOneRequiredWithoutOwnedWorkspacesInput
+  teams: TeamUpdateManyInput
+}
+
+input WorkspaceUpdateWithWhereUniqueWithoutAdministratorInput {
+  where: WorkspaceWhereUniqueInput!
+  data: WorkspaceUpdateWithoutAdministratorDataInput!
+}
+
+input WorkspaceUpdateWithWhereUniqueWithoutUsersInput {
+  where: WorkspaceWhereUniqueInput!
+  data: WorkspaceUpdateWithoutUsersDataInput!
+}
+
+input WorkspaceUpsertWithWhereUniqueWithoutAdministratorInput {
+  where: WorkspaceWhereUniqueInput!
+  update: WorkspaceUpdateWithoutAdministratorDataInput!
+  create: WorkspaceCreateWithoutAdministratorInput!
+}
+
+input WorkspaceUpsertWithWhereUniqueWithoutUsersInput {
+  where: WorkspaceWhereUniqueInput!
+  update: WorkspaceUpdateWithoutUsersDataInput!
+  create: WorkspaceCreateWithoutUsersInput!
+}
+
+input WorkspaceWhereInput {
+  """Logical AND on all given filters."""
+  AND: [WorkspaceWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [WorkspaceWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [WorkspaceWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  users_every: UserWhereInput
+  users_some: UserWhereInput
+  users_none: UserWhereInput
+  administrator: UserWhereInput
+  teams_every: TeamWhereInput
+  teams_some: TeamWhereInput
+  teams_none: TeamWhereInput
+}
+
+input WorkspaceWhereUniqueInput {
+  id: ID
+  name: String
+}
