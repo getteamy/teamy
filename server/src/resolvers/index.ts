@@ -1,7 +1,7 @@
 export default {
     Query: {
-        publishedPosts(root, args, context) {
-            return context.prisma.posts({ where: { published: true } })
+        user(root, args, context) {
+            return context.prisma.user({ where: { id: args.id } })
         }
     },
     Mutation: {
@@ -10,6 +10,7 @@ export default {
                 {
                     email: args.email,
                 }
+
             )
         }
     }
