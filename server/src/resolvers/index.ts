@@ -12,6 +12,15 @@ export default {
                 }
 
             )
+        },
+
+        createSkill(root, args, context) {
+            return context.prisma.createSkill(
+                {
+                    name: args.name,
+                    users: args.users,
+                }
+            )
         }
     }
 }
