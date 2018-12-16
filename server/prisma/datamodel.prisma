@@ -1,9 +1,9 @@
 type User {
   id: ID! @unique
-  email: String!
+  email: String! @unique
   workspaces: [Workspace!] @relation(name: "WorkspaceUsers")
   ownedWorkspaces: [Workspace!] @relation(name: "WorkspaceAdministrator")
-  skills: [Skill!]!
+  skills: [Skill!]
   teams: [Team!] @relation(name: "TeamMate")
   ledTeams: [Team!] @relation(name: "TeamLeader")
 }
