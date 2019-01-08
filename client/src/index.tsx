@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { DisplayText } from '@shopify/polaris'
+import Register from './views/Register'
 import '@shopify/polaris/styles.css'
 
-ReactDOM.render(<DisplayText size="extraLarge">Welcome to Teamy</DisplayText>, document.getElementById('root'))
+ReactDOM.render(<Register />, document.getElementById('root'))
