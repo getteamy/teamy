@@ -3,7 +3,6 @@ import { Button, ButtonGroup, ActionList, Popover, Card, Form, FormLayout, Layou
 import { MainLayout, LoginWrapper, Logo } from './style';
 
 export default () => (
-    <AppProvider>
         <MainLayout>
             <LoginWrapper>
                 <Logo src={"https://i.imgur.com/QflCUhS.png"} />
@@ -31,5 +30,4 @@ export default () => (
                 </Card>
             </LoginWrapper>
         </MainLayout>
-    </AppProvider>
 )
