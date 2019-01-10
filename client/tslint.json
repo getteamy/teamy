@@ -9,6 +9,7 @@
   "rules": {
     "jsx-boolean-value": [true, "never"],
     "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false,
     "arrow-parens": false,
     "curly": false,
     "interface-name": false,
