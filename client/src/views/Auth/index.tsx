@@ -40,7 +40,7 @@ class Auth extends React.Component<RouteComponentProps> {
             return { popoverActive: !popoverActive }
         })
     }
-    
+
 
 
     public render() {
@@ -67,38 +67,38 @@ class Auth extends React.Component<RouteComponentProps> {
                             </Popover>
                         </Card.Header>
                         <Card.Section>
-                            <Form onSubmit={e => e}>
-                                <FormLayout>
-                                    <TextField value={email} onChange={this.handleChange('email')} label='Email' type='email' placeholder='e.g. johndoe@example.com' />
-                                    {!login && <TextField value={name} onChange={this.handleChange('name')} label='Name' placeholder='e.g. John Doe' />}
-                                    <TextField value={password} onChange={this.handleChange('password')} labelAction={login && { content: 'Forgot password?' } || undefined} type='password' label='Password' />
-                                    <Mutation
-                                        mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION}
-                                        variables={{ email, password, name }}
-                                        onCompleted={data => this._confirm(data)}
-                                    >
-                                        {(mutation, {loading}) => (
-                                            <Button primary size={'large'} loading={loading} fullWidth submit onClick={mutation}>{login ? 'Login' : 'Register'}</Button>
+                            <Mutation
+                                mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION}
+                                variables={{ email, password, name }}
+                                onCompleted={data => this._confirm(data)}
+                            >
+                                        {(mutation, { loading, error }) => (
+                                            <Form onSubmit={e => e}>
+                                                <FormLayout>
+                                                    <TextField value={email} onChange={this.handleChange('email')} label='Email' type='email' placeholder='e.g. johndoe@example.com' />
+                                                    {!login && <TextField value={name} onChange={this.handleChange('name')} label='Name' placeholder='e.g. John Doe' />}
+                                                    <TextField value={password} onChange={this.handleChange('password')} labelAction={login && { content: 'Forgot password?' } || undefined} type='password' label='Password' />
+                                                    <Button primary size={'large'} loading={loading} fullWidth submit onClick={mutation}>{login ? 'Login' : 'Register'}</Button>
+                                                </FormLayout>
+                                            </Form>
                                         )}
-                                    </Mutation>
-                                </FormLayout>
-                            </Form>
+                            </Mutation>
                         </Card.Section>
                     </Card>
                 </LoginWrapper>
             </MainLayout>
-        )
-    }
-
+                )
+            }
+        
     public _confirm = async (data : any) => {
-        const { token } = this.state.login ? data.login : data.signup
-        this._saveUserData(token)
-        this.props.history.push(`/`)
-      }
-
+        const {token} = this.state.login ? data.login : data.signup
+                this._saveUserData(token)
+                this.props.history.push(`/`)
+              }
+        
     private _saveUserData = (token : string) => {
-        localStorage.setItem(AUTH_TOKEN, token)
-      }
-}
-
+                    localStorage.setItem(AUTH_TOKEN, token)
+                }
+                }
+                
 export default Auth
