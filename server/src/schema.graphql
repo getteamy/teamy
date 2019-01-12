@@ -1,16 +1,19 @@
-# import * from "./generated/prisma.graphql"
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+}
 
 type Mutation {
-    createUser(email: String) : User!
-    createTeam(name: String!, users: [ID!]!, lead: ID!, workspace: ID!, dateRange: String) : Team!
-    removeTeam(id: ID!) : Team!
-    createWorkspace(name: String!, administrator: ID!) : Workspace!
-    updateWorkspace(name: String, users: [ID!], administrators: [ID!], teams: [ID!]) : Workspace!
-    removeWorkspace(id: ID!) : Workspace!
+    signup(email: String!, password: String!, name: String!): AuthPayload!
+    login(email: String!, password: String!): AuthPayload
 }
 
 type Query {
     user(id: ID, email: String) : User!
-    team(id: ID, name: String) : Team!
-    workspace(id: ID, name: String) : Workspace!
 }

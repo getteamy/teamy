@@ -1,33 +1,6 @@
 type User {
   id: ID! @unique
+  name: String!
   email: String! @unique
-  name: String!
-  workspaces: [Workspace!] @relation(name: "WorkspaceUsers")
-  ownedWorkspaces: [Workspace!] @relation(name: "WorkspaceAdministrator")
-  skills: [Skill!]
-  teams: [Team!] @relation(name: "TeamMate")
-  ledTeams: [Team!] @relation(name: "TeamLeader")
-}
-
-type Workspace {
-  id: ID! @unique
-  name: String! @unique
-  users: [User!]! @relation(name: "WorkspaceUsers")
-  administrator: User! @relation(name: "WorkspaceAdministrator")
-  teams: [Team!]
-}
-
-type Team {
-  id: ID! @unique
-  name: String!
-  users: [User!]! @relation(name: "TeamMate")
-  lead: User! @relation(name: "TeamLeader")
-  workspace: Workspace!
-  dateRange: String
-}
-
-type Skill {
-  id: ID! @unique
-  name: String! @unique
-  users: [User!]
+  password: String!
 }
