@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ActionList, Button, Card, Form, FormLayout, Popover, TextField } from '@shopify/polaris'
+import { ActionList, Button, Card, Form, FormLayout, InlineError, Popover, TextField } from '@shopify/polaris'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 import { RouteComponentProps } from 'react-router-dom'
@@ -73,12 +73,13 @@ class Auth extends React.Component<RouteComponentProps> {
                                 onCompleted={data => this._confirm(data)}
                             >
                                         {(mutation, { loading, error }) => (
-                                            <Form onSubmit={e => e}>
+                                            <Form onSubmit={() => mutation()}>
                                                 <FormLayout>
                                                     <TextField value={email} onChange={this.handleChange('email')} label='Email' type='email' placeholder='e.g. johndoe@example.com' />
                                                     {!login && <TextField value={name} onChange={this.handleChange('name')} label='Name' placeholder='e.g. John Doe' />}
                                                     <TextField value={password} onChange={this.handleChange('password')} labelAction={login && { content: 'Forgot password?' } || undefined} type='password' label='Password' />
-                                                    <Button primary size={'large'} loading={loading} fullWidth submit onClick={mutation}>{login ? 'Login' : 'Register'}</Button>
+                                                    {error && <InlineError message={error.graphQLErrors[0].message} fieldID='error' />}
+                                                    <Button primary size={'large'} loading={loading} fullWidth submit>{login ? 'Login' : 'Register'}</Button>
                                                 </FormLayout>
                                             </Form>
                                         )}

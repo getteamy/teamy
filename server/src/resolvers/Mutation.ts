@@ -15,22 +15,19 @@ const signup = async (parent, args, context, info) => {
 }
 
 const login = async (parent, args, context, info) => {
-    const user = await context.prisma.user({ email: args.email })
-    if (!user) {
-        throw new Error('No such user found')
+    try {
+        const user = await context.prisma.user({ email: args.email })
+        const valid = await bcrypt.compare(args.password, user.password)
+        const token = jwt.sign({ userId: user.id }, APP_SECRET)
+        return {
+            token,
+            user,
+        }
+    } catch(error) {
+        throw new Error('Email or password is invalid')
     }
 
-    const valid = await bcrypt.compare(args.password, user.password)
-    if (!valid) {
-        throw new Error('Invalid password')
-    }
 
-    const token = jwt.sign({ userId: user.id }, APP_SECRET)
-
-    return {
-        token,
-        user,
-    }
 }
 
 export default { signup, login }
