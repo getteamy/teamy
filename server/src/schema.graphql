@@ -1,19 +1,17 @@
-type AuthPayload {
-  token: String
-  user: User
+type Query {
+    user: User!
+}
+type Mutation {
+    signup(name: String!, password: String!): User!
+    login(name: String!, password: String!): LoginResponse!
 }
 
 type User {
   id: ID!
   name: String!
-  email: String!
 }
 
-type Mutation {
-    signup(email: String!, password: String!, name: String!): AuthPayload!
-    login(email: String!, password: String!): AuthPayload
-}
-
-type Query {
-    user(id: ID, email: String) : User!
+type LoginResponse {
+  token: String
+  user: User
 }
