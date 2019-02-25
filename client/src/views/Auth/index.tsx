@@ -1,105 +1,67 @@
 import React from 'react'
 
-import { ActionList, Button, Card, Form, FormLayout, InlineError, Popover, TextField } from '@shopify/polaris'
-import gql from 'graphql-tag'
-import { Mutation } from 'react-apollo'
-import { RouteComponentProps } from 'react-router-dom'
+import { Button, Card, Form } from 'react-bootstrap'
+import styled from 'styled-components'
 
-import { AUTH_TOKEN } from '../../constants'
-import { LoginWrapper, Logo, MainLayout } from './style'
+import Logo from '../../components/Logo'
 
-const SIGNUP_MUTATION = gql`
-  mutation SignupMutation($email: String!, $password: String!, $name: String!) {
-    signup(email: $email, password: $password, name: $name) {
-      token
-    }
-  }
+const StyledCard = styled(Card)`
+    margin-top: 50px;
+    width: 400px;
+    padding: 32px;
+    box-shadow: 0 12px 25px -5px rgba(0,0,0,0.15);
 `
 
-const LOGIN_MUTATION = gql`
-  mutation LoginMutation($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-    }
-  }
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
 `
 
-class Auth extends React.Component<RouteComponentProps> {
-    public state = {
-        email: '',
-        login: true,
-        name: '',
-        password: '',
-        popoverActive: false,
+const CardHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    > h5, div {
+        margin-bottom: 0;
     }
+`
 
-    private handleChange = (field: string) => (value: string) => this.setState({ [field]: value })
+function Auth() {
+    return (
+        <Container>
+            <Logo />
+            <StyledCard>
+                <Card.Body>
+                    <CardHeader>
+                        <Card.Title>Welcome back</Card.Title>
+                        <Button variant='link'>Register</Button>
+                    </CardHeader>
+                    <Form>
+                        <Form.Group controlId='formBasicEmail'>
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type='email' placeholder='eg: johndoe@example.com' />
+                            <Form.Text className='text-muted'>
+                                Your email won't be shared.
+                            </Form.Text>
+                        </Form.Group>
 
-    private togglePopover = () => {
-        this.setState(({ popoverActive }: any) => {
-            return { popoverActive: !popoverActive }
-        })
-    }
+                        <Form.Group controlId='formBasicPassword'>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type='password' placeholder='Password' />
+                        </Form.Group>
+                        <Button variant='primary' block type='submit'>
+                            Submit
+                        </Button>
+                    </Form>
+                </Card.Body>
+            </StyledCard>
+        </Container>
+    )
+}
 
-
-
-    public render() {
-        const { email, password, name, popoverActive, login } = this.state
-        return (
-            <MainLayout>
-                <LoginWrapper>
-                    <Logo src={'https://i.imgur.com/QflCUhS.png'} />
-                    <Card sectioned>
-                        <Card.Header
-                            title='Welcome to Teamy'
-                        >
-                            <Popover
-                                active={popoverActive}
-                                activator={<Button disclosure plain onClick={() => this.togglePopover()}>{login ? 'Login' : 'Register'}</Button>}
-                                onClose={() => this.togglePopover()}
-                            >
-                                <ActionList
-                                    items={[
-                                        { content: 'Login', active: login, onAction: () => this.setState({ login: true }) },
-                                        { content: 'Register', active: !login, onAction: () => this.setState({ login: false }) },
-                                    ]}
-                                />
-                            </Popover>
-                        </Card.Header>
-                        <Card.Section>
-                            <Mutation
-                                mutation={login ? LOGIN_MUTATION : SIGNUP_MUTATION}
-                                variables={{ email, password, name }}
-                                onCompleted={data => this._confirm(data)}
-                            >
-                                        {(mutation, { loading, error }) => (
-                                            <Form onSubmit={() => mutation()}>
-                                                <FormLayout>
-                                                    <TextField value={email} onChange={this.handleChange('email')} label='Email' type='email' placeholder='e.g. johndoe@example.com' />
-                                                    {!login && <TextField value={name} onChange={this.handleChange('name')} label='Name' placeholder='e.g. John Doe' />}
-                                                    <TextField value={password} onChange={this.handleChange('password')} labelAction={login && { content: 'Forgot password?' } || undefined} type='password' label='Password' />
-                                                    {error && <InlineError message={error.graphQLErrors[0].message} fieldID='error' />}
-                                                    <Button primary size={'large'} loading={loading} fullWidth submit>{login ? 'Login' : 'Register'}</Button>
-                                                </FormLayout>
-                                            </Form>
-                                        )}
-                            </Mutation>
-                        </Card.Section>
-                    </Card>
-                </LoginWrapper>
-            </MainLayout>
-                )
-            }
-        
-    public _confirm = async (data : any) => {
-        const {token} = this.state.login ? data.login : data.signup
-                this._saveUserData(token)
-                this.props.history.push(`/`)
-              }
-        
-    private _saveUserData = (token : string) => {
-                    localStorage.setItem(AUTH_TOKEN, token)
-                }
-                }
-                
 export default Auth
