@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Button, Card, Form } from 'react-bootstrap'
 import styled from 'styled-components'
@@ -8,7 +8,8 @@ import Logo from '../../components/Logo'
 const StyledCard = styled(Card)`
     margin-top: 50px;
     width: 400px;
-    padding: 32px;
+    border: 0;
+    padding: 20px;
     box-shadow: 0 12px 25px -5px rgba(0,0,0,0.15);
 `
 
@@ -24,7 +25,7 @@ const CardHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     > h5, div {
         margin-bottom: 0;
@@ -32,14 +33,16 @@ const CardHeader = styled.div`
 `
 
 function Auth() {
+    const [isLoggingIn, setIsLoggingIn] = useState(true)
+
     return (
         <Container>
             <Logo />
             <StyledCard>
                 <Card.Body>
                     <CardHeader>
-                        <Card.Title>Welcome back</Card.Title>
-                        <Button variant='link'>Register</Button>
+                        <Card.Title>{isLoggingIn ? 'Welcome back' : 'Welcome'}</Card.Title>
+                        <Button variant='link' onClick={() => setIsLoggingIn(!isLoggingIn)}>{isLoggingIn ? 'Register' : 'Login'}</Button>
                     </CardHeader>
                     <Form>
                         <Form.Group controlId='formBasicEmail'>
@@ -54,8 +57,8 @@ function Auth() {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type='password' placeholder='Password' />
                         </Form.Group>
-                        <Button variant='primary' block type='submit'>
-                            Submit
+                        <Button variant='primary' type='submit'>
+                            {isLoggingIn ? 'Login' : 'Register'}
                         </Button>
                     </Form>
                 </Card.Body>
