@@ -5,6 +5,9 @@ import { ApolloProvider } from 'react-apollo'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
+import './index.css'
+import './reset.css'
+
 import Auth from './views/Auth'
 
 const client = new ApolloClient({
