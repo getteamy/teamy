@@ -18,6 +18,16 @@ const Container = styled.div`
     flex-direction: column;
 `
 
+const Header = styled.div`
+    display: flex;
+    width: 100%;
+    align-items: baseline;
+    
+    & > :first-child {
+        margin-right: 16px;
+    }
+`
+
 function Auth() {
     const [isLoggingIn, setIsLoggingIn] = useState(true)
 
@@ -26,8 +36,10 @@ function Auth() {
             <Logo />
             <CardContainer>
                 <Card>
-                    <H6>Welcome</H6>
-                    <SmallSubtitle>Connect to Teamy</SmallSubtitle>
+                    <Header>
+                        <H6>Welcome</H6>
+                        <SmallSubtitle>Connect to Teamy</SmallSubtitle>
+                    </Header>
                 </Card>
             </CardContainer>
        </Container>
