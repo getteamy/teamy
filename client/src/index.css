@@ -2,3 +2,7 @@ body {
     background-color: #F4F6F8;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
+
+#root {
+    height: 100vh;
+}
