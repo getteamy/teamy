@@ -4,8 +4,8 @@ import styled from 'styled-components'
 
 import Card from '../../components/Card'
 import Logo from '../../components/Logo'
-import { H6, SmallSubtitle } from '../../components/Typography'
 import StyledInput from '../../components/TextField'
+import { H6, SmallSubtitle } from '../../components/Typography'
 
 const CardContainer = styled.div`
     height: 376px;
