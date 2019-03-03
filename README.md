@@ -1,6 +1,27 @@
-# Teamy
+# 👩🏼‍🔧👨🏼‍🔧👩🏼‍🔬👨🏼‍🔬 Teamy
 
-Build better teams faster
+Here is the main repository of the Teamy webapp.
 
-## User experience path
-![User experience path diagram](https://i.imgur.com/VwA8YU0.png)
+## Structure
+
+```
+.
+├── client             # React client 
+├── server             # Server
+```
+
+## Working on teamy
+
+```
+cd server
+docker compose up -d # Start Postgres and the prisma client
+yarn start
+
+cd client
+yarn start
+```
+
+## Contribution
+
+Open PRs to the master branch. They will be reviewed shortly after
+Linters are very strict so it is easy to follow our style conventions
