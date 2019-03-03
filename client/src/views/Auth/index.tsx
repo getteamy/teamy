@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
+import gql from 'graphql-tag'
+import { Mutation } from 'react-apollo'
 import styled from 'styled-components'
+import zxcvbn from 'zxcvbn'
 
 import Button, { variations } from '../../components/Button'
 import Card from '../../components/Card'
 import Logo from '../../components/Logo'
+import PasswordStrenghtIndicator from '../../components/PasswordStrenghtIndicator'
 import StyledInput from '../../components/TextField'
 import { H6, SmallBody, SmallSubtitle } from '../../components/Typography'
 
@@ -41,7 +45,7 @@ const Footer = styled.div`
     justify-content: space-between;
     width: 100%;
     align-items: baseline;
-    margin-top: 32px;
+    margin-top: 36px;
 `
 
 const UnderlineContainer = styled.div`
@@ -50,41 +54,84 @@ const UnderlineContainer = styled.div`
     margin-top: 36px;
 `
 
+const LOGIN = gql`
+    mutation login($name: String!, $password: String!) {
+        login(name: $name, password: $password) {
+            token
+        }
+    }
+`
+
 function Auth() {
     const [isLoggingIn, setIsLoggingIn] = useState(true)
+    const [name, setName] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordStrength, setPasswordStrength] = useState(0)
+
+    useEffect(
+        () => {
+            if (!isLoggingIn) {
+                const strength = Number(zxcvbn(password).score.toFixed())
+                setPasswordStrength((strength !== 0 ? strength : 1))
+            }
+        }, [password],
+    )
+
 
     return (
         <Container>
             <Logo />
             <CardContainer>
-                <Card>
-                    <Header>
-                        <H6>Welcome</H6>
-                        <SmallSubtitle subdued>Connect to Teamy</SmallSubtitle>
-                    </Header>
-                    <StyledForm>
-                        <StyledInput
-                            label='Email'
-                            onChange={() => false}
-                            placeholder='johndoe@example.com'
-                        />
-                        <StyledInput
-                            label='Password'
-                            type='password'
-                            onChange={() => false}
-                        />
-                    </StyledForm>
-                    <Footer>
-                        <Button variation={variations.LINK}>I forgot my password</Button>
-                        <Button>Login</Button>
-                    </Footer>
-                </Card>
+                <Mutation mutation={LOGIN}>
+                    {(login, { data, loading, error }) =>
+                        <Card>
+                            <Header>
+                                <H6>Welcome</H6>
+                                <SmallSubtitle subdued>
+                                    {isLoggingIn ? 'Connect to Teamy' : 'Register to teamy'}
+                                </SmallSubtitle>
+                            </Header>
+                            <StyledForm>
+                                <StyledInput
+                                    label='Name'
+                                    onChange={({ target: { value } }: any) => setName(value)}
+                                    value={name}
+                                    placeholder='johndoe@example.com'
+                                    error={error && error.graphQLErrors[0].message}
+                                />
+                                <StyledInput
+                                    label='Password'
+                                    type='password'
+                                    onChange={({ target: { value } }: any) => setPassword(value)}
+                                    value={password}
+                                />
+                            </StyledForm>
+                            <Footer>
+                                {isLoggingIn && <Button variation={variations.LINK}>I forgot my password</Button>}
+                                {!isLoggingIn && password !== '' ? <PasswordStrenghtIndicator strenght={passwordStrength} /> : <div/>}
+                                <Button
+                                    isLoading={loading}
+                                    onClick={() => login({ variables: { name, password } })}
+                                    isDisabled={password === '' || name === ''}
+                                >
+                                    {isLoggingIn ? 'Login' : 'Register'}
+                                </Button>
+                            </Footer>
+                        </Card>}
+                </Mutation>
             </CardContainer>
             <UnderlineContainer>
-                <SmallBody subdued>First time there?</SmallBody>
-                <Button variation={variations.LINK}>Create an account</Button>
+                <SmallBody subdued>
+                    {isLoggingIn ? 'First time here?' : 'Already registered?'}
+                </SmallBody>
+                <Button 
+                    variation={variations.LINK}
+                    onClick={() => setIsLoggingIn(!isLoggingIn)}
+                >
+                    {isLoggingIn ? 'Create an account' : 'Login to your account'}
+                </Button>
             </UnderlineContainer>
-       </Container>
+        </Container>
     )
 }
 
