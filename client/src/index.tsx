@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ApolloClient from 'apollo-boost'
+import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -11,7 +11,8 @@ import './reset.css'
 import Auth from './views/Auth'
 
 const client = new ApolloClient({
-    uri: 'localhost:4000',
+    cache: new InMemoryCache(),
+    uri: 'http://localhost:4000',
 })
 
 function App() {
