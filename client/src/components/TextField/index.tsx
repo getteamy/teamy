@@ -1,6 +1,8 @@
 import React, { ChangeEvent, ReactNode } from 'react'
 
-import styled, { css } from 'styled-components'
+import { Error } from 'styled-icons/material'
+
+import styled from 'styled-components'
 import { colors } from '../../utils/colors'
 import { easing } from '../../utils/easing'
 
@@ -10,18 +12,17 @@ interface StyledInputProps {
 }
 
 export interface InputProps {
-  hasError?: boolean
+  error?: string
   isDisabled?: boolean
   label: string
   isRequired?: boolean
-  onChange?: (value: string | ChangeEvent<HTMLInputElement>) => any
+  onChange?: (event: React.FormEvent) => void
   type?: string
   value?: string
   placeholder?: string
 }
 
 const Input = styled.input<StyledInputProps>`
-    border: 1px solid ${colors.sky};
     outline: none;
     border-radius: 5px;
     height: 40px;
@@ -35,14 +36,26 @@ const Input = styled.input<StyledInputProps>`
         border-color: rgba(140,190,210,1);
         box-shadow: 0 0 0 0.2rem ${colors.blueLight};
     }
-    ${props =>
-    props.isDisabled &&
-    css`
-        cursor: not-allowed;
-    `};
-
+    
     ::placeholder {
         color: ${colors.skyDark};
+    }
+
+    ${props =>
+        props.isDisabled &&
+        `
+            cursor: not-allowed;
+        `
+    };
+
+    ${props => 
+        props.hasError ? 
+        `
+            border: 1px solid ${colors.red};
+        ` :
+        `
+            border: 1px solid ${colors.sky};
+        `
     }
 `
 
@@ -57,16 +70,51 @@ const Label = styled.p`
     letter-spacing: 0;
     text-align: left;
     line-height: 20px;
-    margin-bottom: 16px;
 `
 
-function TextField({hasError, label, isDisabled, isRequired, onChange, type, value, placeholder} : InputProps) {
+const ErrorLabel = styled(Label)`
+    color: ${colors.red};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: appear .15s ${easing.standard};
+
+    @keyframes appear {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+`
+
+const ErrorIcon = styled(Error)`
+    margin-left: 4px;
+`
+
+const LabelContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+`
+
+function TextField({label, isDisabled = false, error, onChange, type, value, placeholder} : InputProps) {
     return (
         <Container>
-            <Label>{label}</Label>
+            <LabelContainer>
+                <Label>{label}</Label>
+                {error && <ErrorLabel>{error}<ErrorIcon size='20'/></ErrorLabel>}
+            </LabelContainer>
             <Input
                 type={type}
                 placeholder={placeholder}
+                onChange={onChange}
+                value={value}
+                hasError={error && true || false}
+                isDisabled={isDisabled}
             />
         </Container>
     )
