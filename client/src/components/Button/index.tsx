@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { colors } from '../../utils/colors'
 import { easing } from '../../utils/easing'
 import { shadows } from '../../utils/shadows'
+import Loader from './loader'
 
 export enum variations {
     DANGER = 'danger',
@@ -59,6 +60,11 @@ const StyledButton = styled.div<ButtonProps>`
     transition: .15s ${easing.standard};
     user-select: none;
 
+    :active {
+        box-shadow: none;
+        transition: none;
+        filter: brightness(0.8);
+    }
     
     ${props => {
         if (props.variation !== variations.LINK) {
@@ -74,15 +80,26 @@ const StyledButton = styled.div<ButtonProps>`
     }}
     
 
-    :active {
-        box-shadow: none;
-        transition: none;
-        filter: brightness(0.8);
-    }
 
     ${props => (
         getStyleFromVariation(props.variation)
     )}
+
+    ${props => props.isLoading &&
+        `
+          color: transparent;
+          cursor: wait;
+        `
+    }
+
+    ${props => props.isDisabled &&
+        `
+            cursor: none;
+            pointer-events: none;
+            background-color: ${colors.skyDark};
+            box-shadow: none;
+        `
+    }
 `
 
 function Button(props : ButtonProps) {
@@ -92,13 +109,19 @@ function Button(props : ButtonProps) {
         isDisabled,
         isLoading,
         isActive,
+        onClick,
         variation = variations.PRIMARY,
     } = props
+    
     return (
         <StyledButton
             variation={variation}
+            onClick={onClick}
+            isLoading={isLoading}
+            isDisabled={isDisabled}
         >
             {children}
+            {isLoading && variation !== variations.LINK && <Loader />}
         </StyledButton>
     )
 }
