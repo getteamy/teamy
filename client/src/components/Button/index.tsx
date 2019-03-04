@@ -4,16 +4,8 @@ import styled from 'styled-components'
 import { colors } from '../../utils/colors'
 import { easing } from '../../utils/easing'
 import { shadows } from '../../utils/shadows'
+import { variations } from '../../utils/variations'
 import Loader from './loader'
-
-export enum variations {
-    DANGER = 'danger',
-    LINK = 'link',
-    PRIMARY = 'primary',
-    SECONDARY = 'secondary',
-    SUBTLE = 'subtle',
-    WARNING = 'warning',
-}
 
 export type ButtonProps = {
     fullWidth?: boolean

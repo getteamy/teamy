@@ -1,6 +1,7 @@
 import React from 'react'
 
-import ApolloClient, { InMemoryCache } from 'apollo-boost'
+import { ApolloLink, HttpLink, InMemoryCache } from 'apollo-boost'
+import ApolloClient from 'apollo-client'
 import { onError, ErrorResponse } from 'apollo-link-error'
 import { ApolloProvider } from 'react-apollo'
 import ReactDOM from 'react-dom'
@@ -11,15 +12,26 @@ import './reset.css'
 
 import Auth from './views/Auth'
 
-const errorLink = ({ graphQLErrors, networkError } : ErrorResponse) => {
+const errorLink = onError(({ graphQLErrors, networkError, response } : ErrorResponse) => {
     if (graphQLErrors) graphQLErrors.map(({ message, locations, path }) => console.log(message))
-    if (networkError) console.log(`[Network error]: ${networkError}`)
-}
+    if (networkError) {
+        // TODO : Implement this toaster
+        // toaster.show({
+        //     intent: intents.DANGER,
+        //     message,
+        // })
+    }
+})
+
+const uri = new HttpLink({
+    credentials: 'same-origin',
+    uri: 'https://w5xlvm3vzz.lp.gql.zone/graphql',
+  })
+
 
 const client = new ApolloClient({
     cache: new InMemoryCache(),
-    onError: errorLink,
-    uri: 'http://localhost:4000',
+    link: ApolloLink.from([errorLink, uri]),
 })
 
 function App() {
