@@ -5,12 +5,13 @@ import { Mutation } from 'react-apollo'
 import styled from 'styled-components'
 import zxcvbn from 'zxcvbn'
 
-import Button, { variations } from '../../components/Button'
+import Button from '../../components/Button'
 import Card from '../../components/Card'
 import Logo from '../../components/Logo'
 import PasswordStrenghtIndicator from '../../components/PasswordStrenghtIndicator'
 import StyledInput from '../../components/TextField'
 import { H6, SmallBody, SmallSubtitle } from '../../components/Typography'
+import { variations } from '../../utils/variations'
 
 const CardContainer = styled.div`
     height: 400px;
@@ -97,7 +98,7 @@ function Auth() {
                                     onChange={({ target: { value } }: any) => setName(value)}
                                     value={name}
                                     placeholder='johndoe@example.com'
-                                    error={error && error.graphQLErrors[0].message}
+                                    error={error && error.graphQLErrors[0] && error.graphQLErrors[0].message}
                                 />
                                 <StyledInput
                                     label='Password'

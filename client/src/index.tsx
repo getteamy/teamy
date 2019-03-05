@@ -10,22 +10,20 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './index.css'
 import './reset.css'
 
+import { Toaster } from './components/Toaster'
 import Auth from './views/Auth'
 
 const errorLink = onError(({ graphQLErrors, networkError, response } : ErrorResponse) => {
     if (graphQLErrors) graphQLErrors.map(({ message, locations, path }) => console.log(message))
     if (networkError) {
         // TODO : Implement this toaster
-        // toaster.show({
-        //     intent: intents.DANGER,
-        //     message,
-        // })
+        Toaster.create({message: networkError.message})
     }
 })
 
 const uri = new HttpLink({
     credentials: 'same-origin',
-    uri: 'https://w5xlvm3vzz.lp.gql.zone/graphql',
+    uri: 'http://localhost:4000/',
   })
 
 
