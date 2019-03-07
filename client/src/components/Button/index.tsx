@@ -97,10 +97,8 @@ const StyledButton = styled.div<ButtonProps>`
 function Button(props : ButtonProps) {
     const {
         children,
-        fullWidth,
         isDisabled,
         isLoading,
-        isActive,
         onClick,
         variation = variations.PRIMARY,
     } = props
