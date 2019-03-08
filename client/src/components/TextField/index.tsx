@@ -3,7 +3,7 @@ import React, { ChangeEvent, ReactNode } from 'react'
 import { Error } from 'styled-icons/material'
 
 import styled from 'styled-components'
-import { colors } from '../../utils/colors'
+import { B300, N50, N80, N800 } from '../../utils/colors'
 import { easing } from '../../utils/easing'
 
 interface StyledInputProps {
@@ -28,17 +28,16 @@ const Input = styled.input<StyledInputProps>`
     height: 40px;
     padding: 10px;
     font-size: 14px;
-    color: ${colors.ink};
+    color: ${N50};
     transition: border-color .15s ${easing.standard},box-shadow .15s ${easing.standard};
     width: 100%;
     
     :focus {
-        border-color: rgba(140,190,210,1);
-        box-shadow: 0 0 0 0.2rem ${colors.blueLight};
+        border-color: ${B300};
     }
     
     ::placeholder {
-        color: ${colors.skyDark};
+        color: ${N80};
     }
 
     ${props =>
@@ -47,16 +46,6 @@ const Input = styled.input<StyledInputProps>`
             cursor: not-allowed;
         `
     };
-
-    ${props => 
-        props.hasError ? 
-        `
-            border: 1px solid ${colors.red};
-        ` :
-        `
-            border: 1px solid ${colors.sky};
-        `
-    }
 `
 
 const Container = styled.div`
@@ -66,33 +55,10 @@ const Container = styled.div`
 const Label = styled.p`
     opacity: 0.87;
     font-size: 14px;
-    color: ${colors.ink};
+    color: ${N800};
     letter-spacing: 0;
     text-align: left;
     line-height: 20px;
-`
-
-const ErrorLabel = styled(Label)`
-    color: ${colors.red};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: appear .15s ${easing.standard};
-
-    @keyframes appear {
-        from {
-            opacity: 0;
-            transform: translateY(8px);
-        }
-        to {
-            opacity: 1;
-            transform: none;
-        }
-    }
-`
-
-const ErrorIcon = styled(Error)`
-    margin-left: 4px;
 `
 
 const LabelContainer = styled.div`
@@ -106,7 +72,6 @@ function TextField({label, isDisabled = false, error, onChange, type, value, pla
         <Container>
             <LabelContainer>
                 <Label>{label}</Label>
-                {error && <ErrorLabel>{error}<ErrorIcon size='20'/></ErrorLabel>}
             </LabelContainer>
             <Input
                 type={type}

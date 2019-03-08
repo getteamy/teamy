@@ -2,7 +2,7 @@ import React from 'react'
 
 import styled from 'styled-components'
 
-import { colors } from '../../utils/colors'
+import { N10, N20, N60 } from '../../utils/colors'
 import { easing } from '../../utils/easing'
 import { SmallSubtitle } from '../Typography'
 
@@ -35,12 +35,12 @@ const Step = styled.div<StepProps>`
         ({active}) => (
             active ? 
             `
-                background-color: ${colors.sky};
-                color: ${colors.inkLighter};
+                background-color: ${N20};
+                color: ${N60};
             ` : 
             `
-                color: ${colors.inkLightest};
-                background-color: ${colors.skyLight};
+                color: ${N10};
+                background-color: ${N20};
             `
         )
     }

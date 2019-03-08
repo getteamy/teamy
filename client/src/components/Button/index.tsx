@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes } from 'react'
 
 import styled from 'styled-components'
-import { colors } from '../../utils/colors'
+import { B300, N20 } from '../../utils/colors'
 import { easing } from '../../utils/easing'
 import { shadows } from '../../utils/shadows'
 import { variations } from '../../utils/variations'
@@ -20,12 +20,12 @@ const getStyleFromVariation = (variation?: variations) => {
     switch (variation) {
         case 'primary':
             return `
-                background: ${colors.blue};
+                background: ${B300};
                 color: white;
             `
         case 'link':
             return `
-                color: ${colors.blue};
+                color: ${B300};
                 background: none;
             `
     }
@@ -62,7 +62,7 @@ const StyledButton = styled.div<ButtonProps>`
         if (props.variation !== variations.LINK) {
             return `
             padding: 0 12px;
-            box-shadow: ${shadows[80]};
+            ${shadows[100]}
             :hover {
                 box-shadow: ${shadows[200]};
             }
@@ -88,7 +88,7 @@ const StyledButton = styled.div<ButtonProps>`
         `
             cursor: none;
             pointer-events: none;
-            background-color: ${colors.skyDark};
+            background-color: ${N20};
             box-shadow: none;
         `
     }

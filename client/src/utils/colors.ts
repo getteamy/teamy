@@ -1,62 +1,84 @@
-// tslint:disable object-literal-sort-keys
+export const R50 = '#FFEBE6' 
+export const R75 = '#FFBDAD' 
+export const R100 = '#FF8F73' 
+export const R200 = '#FF7452' 
+export const R300 = '#FF5630' 
+export const R400 = '#DE350B' 
+export const R500 = '#BF2600'  
 
-export const colors = {
-    purpleText: 'rgba(80, 73, 90,1.0)',
-    purpleDarker: 'rgba(35, 0, 81,1.0)',
-    purpleDark: 'rgba(80, 36, 143,1.0)',
-    purplee: 'rgba(156, 106, 222,1.0)',
-    purpleLight: 'rgba(227, 208, 255,1.0)',
-    purpleLighter: 'rgba(246, 240, 253,1.0)',
-    indigoText: 'rgba(62, 65, 85,1.0)',
-    indigoDarker: 'rgba(0, 6, 57,1.0)',
-    indigoDark: 'rgba(32, 46, 120,1.0)',
-    indigo: 'rgba(92, 106, 196,1.0)',
-    indigoLight: 'rgba(179, 188, 245,1.0)',
-    indigoLighter: 'rgba(244, 245, 250,1.0)',
-    blueText: 'rgba(62, 78, 87,1.0)',
-    blueDarker: 'rgba(0, 20, 41,1.0)',
-    blueDark: 'rgba(8, 78, 138,1.0)',
-    blue: 'rgba(0, 122, 206,1.0)',
-    blueLight: 'rgba(180, 225, 250,1.0)',
-    blueLighter: 'rgba(235, 245, 250,1.0)',
-    tealText: 'rgba(64, 83, 82,1.0)',
-    teaDarker: 'rgba(0, 49, 53,1.0)',
-    tealDark: 'rgba(0, 132, 142,1.0)',
-    teal: 'rgba(71, 193, 191,1.0)',
-    tealLight: 'rgba(183, 236, 236,1.0)',
-    tealLighter: 'rgba(224, 245, 245,1.0)',
-    greenText: 'rgba(65, 79, 62,1.0)',
-    greenDarker: 'rgba(23, 54, 48,1.0)',
-    greenDark: 'rgba(16, 128, 67,1.0)',
-    green: 'rgba(80, 184, 60,1.0)',
-    greenLight: 'rgba(187, 229, 179,1.0)',
-    greenLighter: 'rgba(227, 241, 223,1.0)',
-    yellowText: 'rgba(89, 81, 48,1.0)',
-    yellowDarker: 'rgba(87, 59, 0,1.0)',
-    yellowDark: 'rgba(138, 97, 22,1.0)',
-    yellow: 'rgba(238, 194, 0,1.0)',
-    yellowLight: 'rgba(255, 234, 138,1.0)',
-    yellowLighter: 'rgba(252, 241, 205,1.0)',
-    orangeText: 'rgba(89, 68, 48,1.0)',
-    orangeDarker: 'rgba(74, 21, 4,1.0)',
-    orangeDark: 'rgba(192, 87, 23,1.0)',
-    orange: 'rgba(244, 147, 66,1.0)',
-    orangeLight: 'rgba(255, 197, 139,1.0)',
-    orangeLighter: 'rgba(252, 235, 219,1.0)',
-    redText: 'rgba(88, 60, 53,1.0)',
-    redDarker: 'rgba(51, 1, 1,1.0)',
-    redDark: 'rgba(191, 7, 17,1.0)',
-    red: 'rgba(222, 54, 24,1.0)',
-    redLight: 'rgba(254, 173, 154,1.0)',
-    redLighter: 'rgba(251, 234, 229,1.0)',
-    ink: 'rgba(33, 43, 54,1.0)',
-    inkLight: 'rgba(69, 79, 91,1.0)',
-    inkLighter: 'rgba(99, 115, 129,1.0)',
-    inkLightest: 'rgba(145, 158, 171,1.0)',
-    skyDark: 'rgba(196, 205, 213,1.0)',
-    sky: 'rgba(223, 227, 232,1.0)',
-    skyLight: 'rgba(244, 246, 248,1.0)',
-    skyLighter: 'rgba(249, 250, 251,1.0)',
-    black: 'rgba(0, 0, 0,1.0)',
-    white: 'rgba(255, 255, 255,1.0)',
-}
+export const Y50 = '#FFFAE6' 
+export const Y75 = '#FFF0B3' 
+export const Y100 = '#FFE380' 
+export const Y200 = '#FFC400' 
+export const Y300 = '#FFAB00' 
+export const Y400 = '#FF991F' 
+export const Y500 = '#FF8B00'  
+
+export const G50 = '#E3FCEF' 
+export const G75 = '#ABF5D1' 
+export const G100 = '#79F2C0' 
+export const G200 = '#57D9A3' 
+export const G300 = '#36B37E' 
+export const G400 = '#00875A' 
+export const G500 = '#006644' 
+
+export const B50 = '#DEEBFF' 
+export const B75 = '#B3D4FF' 
+export const B100 = '#4C9AFF' 
+export const B200 = '#2684FF' 
+export const B300 = '#0065FF' 
+export const B400 = '#0052CC' 
+export const B500 = '#0747A6'  
+
+export const P50 = '#EAE6FF' 
+export const P75 = '#C0B6F2' 
+export const P100 = '#998DD9' 
+export const P200 = '#8777D9' 
+export const P300 = '#6554C0' 
+export const P400 = '#5243AA' 
+export const P500 = '#403294'  
+
+export const T50 = '#E6FCFF' 
+export const T75 = '#B3F5FF' 
+export const T100 = '#79E2F2' 
+export const T200 = '#00C7E6' 
+export const T300 = '#00B8D9' 
+export const T400 = '#00A3BF' 
+export const T500 = '#008DA6'  
+
+export const N0 = '#FFFFFF' 
+export const N10 = '#FAFBFC' 
+export const N20 = '#F4F5F7' 
+export const N30 = '#EBECF0' 
+export const N40 = '#DFE1E6' 
+export const N50 = '#C1C7D0' 
+export const N60 = '#B3BAC5' 
+export const N70 = '#A5ADBA' 
+export const N80 = '#97A0AF' 
+export const N90 = '#8993A4' 
+export const N100 = '#7A869A' 
+export const N200 = '#6B778C' 
+export const N300 = '#5E6C84' 
+export const N400 = '#505F79' 
+export const N500 = '#42526E' 
+export const N600 = '#344563' 
+export const N700 = '#253858' 
+export const N800 = '#172B4D' 
+
+export const N10A = 'rgba(9, 30, 66, 0.02)'
+export const N20A = 'rgba(9, 30, 66, 0.04)'
+export const N30A = 'rgba(9, 30, 66, 0.08)'
+export const N40A = 'rgba(9, 30, 66, 0.13)'
+export const N50A = 'rgba(9, 30, 66, 0.25)'
+export const N60A = 'rgba(9, 30, 66, 0.31)'
+export const N70A = 'rgba(9, 30, 66, 0.36)'
+export const N80A = 'rgba(9, 30, 66, 0.42)'
+export const N90A = 'rgba(9, 30, 66, 0.48)'
+export const N100A = 'rgba(9, 30, 66, 0.54)'
+export const N200A = 'rgba(9, 30, 66, 0.60)'
+export const N300A = 'rgba(9, 30, 66, 0.66)'
+export const N400A = 'rgba(9, 30, 66, 0.71)'
+export const N500A = 'rgba(9, 30, 66, 0.77)'
+export const N600A = 'rgba(9, 30, 66, 0.82)'
+export const N700A = 'rgba(9, 30, 66, 0.89)'
+export const N800A = 'rgba(9, 30, 66, 0.95)'

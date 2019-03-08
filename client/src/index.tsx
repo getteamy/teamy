@@ -10,14 +10,13 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './index.css'
 import './reset.css'
 
-import { Toaster } from './components/Toaster'
 import Auth from './views/Auth'
 
 const errorLink = onError(({ graphQLErrors, networkError, response } : ErrorResponse) => {
     if (graphQLErrors) graphQLErrors.map(({ message, locations, path }) => console.log(message))
     if (networkError) {
         // TODO : Implement this toaster
-        Toaster.create({message: networkError.message})
+        
     }
 })
 

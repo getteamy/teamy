@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react'
 
 import styled from 'styled-components'
+import { shadows } from '../../utils/shadows';
 
 const StyledCard = styled.div`
     background: white;
-    box-shadow: 0 12px 24px -6px rgba(0,0,0,0.14);
+    ${shadows[400]}
     box-sizing: border-box;
     padding: 40px;
     border-radius: 5px;

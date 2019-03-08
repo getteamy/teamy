@@ -1,11 +1,12 @@
 import styled from 'styled-components'
-import { colors } from '../../utils/colors'
+
+import { N20, N90 } from '../../utils/colors'
 
 interface TextProps {
     subdued?: boolean
 }
 
-const getSubduedColor = (subdued? : boolean) => subdued ? colors.inkLighter : colors.ink
+const getSubduedColor = (subdued? : boolean) => subdued ? N20 : N90
 
 export const H6 = styled.p<TextProps>`
     opacity: 0.87;
