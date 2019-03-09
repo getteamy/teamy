@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes } from 'react'
 
 import styled from 'styled-components'
-import { B300, N20, B200, B400, N50 } from '../../utils/colors'
+import { B200, B300, B400, N20, N50 } from '../../utils/colors'
 import { easing } from '../../utils/easing'
 import { shadows } from '../../utils/shadows'
 import { variations } from '../../utils/variations'
