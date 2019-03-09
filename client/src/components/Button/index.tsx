@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes } from 'react'
 
 import styled from 'styled-components'
-import { B300, N20 } from '../../utils/colors'
+import { B300, N20, B200, B400, N50 } from '../../utils/colors'
 import { easing } from '../../utils/easing'
 import { shadows } from '../../utils/shadows'
 import { variations } from '../../utils/variations'
@@ -22,7 +22,23 @@ const getStyleFromVariation = (variation?: variations) => {
             return `
                 background: ${B300};
                 color: white;
+
+                :hover {
+                    background-color: ${B200};
+                }
+
+                :active {
+                    background-color: ${B400};
+                    box-shadow: none;
+                    transition: none;
+                }
+
+                :disabled {
+                    background-color: ${N20};
+                    color: ${N50};
+                }
             `
+        
         case 'link':
             return `
                 color: ${B300};
@@ -36,7 +52,7 @@ const getStyleFromVariation = (variation?: variations) => {
 const StyledButton = styled.div<ButtonProps>`
     border-radius: 5px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: -0.1px;
     height: 40px;
     display: inline-flex;
@@ -51,20 +67,14 @@ const StyledButton = styled.div<ButtonProps>`
     outline: none;
     transition: .15s ${easing.standard};
     user-select: none;
-
-    :active {
-        box-shadow: none;
-        transition: none;
-        filter: brightness(0.8);
-    }
     
     ${props => {
         if (props.variation !== variations.LINK) {
             return `
-            padding: 0 12px;
-            ${shadows[100]}
+            padding: 0 14px;
+            box-shadow: 0 1px 3px 0 rgba(63,63,68,0.15);
             :hover {
-                box-shadow: ${shadows[200]};
+                ${shadows[200]};
             }
 
             `
@@ -86,9 +96,9 @@ const StyledButton = styled.div<ButtonProps>`
 
     ${props => props.isDisabled &&
         `
-            cursor: none;
             pointer-events: none;
             background-color: ${N20};
+            color: ${N50}
             box-shadow: none;
         `
     }

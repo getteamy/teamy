@@ -1,4 +1,4 @@
-import { N50A, N60A } from './colors';
+import { N50A, N60A } from './colors'
 
 export const shadows = {
     100: `box-shadow: 0 1px 1px ${N50A}, 0 0 1px 0 ${N60A};`,

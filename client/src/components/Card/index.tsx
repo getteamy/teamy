@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 
 import styled from 'styled-components'
-import { shadows } from '../../utils/shadows';
+import { shadows } from '../../utils/shadows'
 
 const StyledCard = styled.div`
     background: white;

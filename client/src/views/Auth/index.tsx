@@ -8,9 +8,8 @@ import zxcvbn from 'zxcvbn'
 import Button from '../../components/Button'
 import Card from '../../components/Card'
 import Logo from '../../components/Logo'
-import PasswordStrenghtIndicator from '../../components/PasswordStrenghtIndicator'
 import StyledInput from '../../components/TextField'
-import { H6, SmallBody, SmallSubtitle } from '../../components/Typography'
+import { H200, H600, Paragraph } from '../../components/Typography'
 import { variations } from '../../utils/variations'
 
 const CardContainer = styled.div`
@@ -35,6 +34,7 @@ const Header = styled.div`
     display: flex;
     width: 100%;
     align-items: baseline;
+    justify-content: space-between;
 
     > :first-child {
         margin-right: 16px;
@@ -87,10 +87,10 @@ function Auth() {
                     {(login, { data, loading, error }) =>
                         <Card>
                             <Header>
-                                <H6>Welcome</H6>
-                                <SmallSubtitle subdued>
+                                <H600>Welcome</H600>
+                                <H200>
                                     {isLoggingIn ? 'Connect to Teamy' : 'Register to teamy'}
-                                </SmallSubtitle>
+                                </H200>
                             </Header>
                             <StyledForm>
                                 <StyledInput
@@ -109,7 +109,6 @@ function Auth() {
                             </StyledForm>
                             <Footer>
                                 {isLoggingIn && <Button variation={variations.LINK}>I forgot my password</Button>}
-                                {!isLoggingIn && password !== '' ? <PasswordStrenghtIndicator strenght={passwordStrength} /> : <div/>}
                                 <Button
                                     isLoading={loading}
                                     onClick={() => login({ variables: { name, password } })}
@@ -122,9 +121,9 @@ function Auth() {
                 </Mutation>
             </CardContainer>
             <UnderlineContainer>
-                <SmallBody subdued>
+                <Paragraph>
                     {isLoggingIn ? 'First time here?' : 'Already registered?'}
-                </SmallBody>
+                </Paragraph>
                 <Button 
                     variation={variations.LINK}
                     onClick={() => setIsLoggingIn(!isLoggingIn)}

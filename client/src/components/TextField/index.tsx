@@ -1,10 +1,9 @@
-import React, { ChangeEvent, ReactNode } from 'react'
-
-import { Error } from 'styled-icons/material'
+import React from 'react'
 
 import styled from 'styled-components'
-import { B300, N50, N80, N800 } from '../../utils/colors'
+import { B300, N50, N80, N800, N90 } from '../../utils/colors'
 import { easing } from '../../utils/easing'
+import { H400 } from '../Typography'
 
 interface StyledInputProps {
     hasError?: boolean
@@ -25,10 +24,12 @@ export interface InputProps {
 const Input = styled.input<StyledInputProps>`
     outline: none;
     border-radius: 5px;
+    border: 1px solid ${N50};
     height: 40px;
     padding: 10px;
     font-size: 14px;
-    color: ${N50};
+    color: ${N800};
+    caret-color: ${B300};
     transition: border-color .15s ${easing.standard},box-shadow .15s ${easing.standard};
     width: 100%;
     
@@ -52,26 +53,17 @@ const Container = styled.div`
     margin-top: 32px;
 `
 
-const Label = styled.p`
-    opacity: 0.87;
-    font-size: 14px;
-    color: ${N800};
-    letter-spacing: 0;
-    text-align: left;
-    line-height: 20px;
-`
-
 const LabelContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 `
 
 function TextField({label, isDisabled = false, error, onChange, type, value, placeholder} : InputProps) {
     return (
         <Container>
             <LabelContainer>
-                <Label>{label}</Label>
+                <H400>{label}</H400>
             </LabelContainer>
             <Input
                 type={type}
