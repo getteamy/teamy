@@ -7,53 +7,11 @@ import zxcvbn from 'zxcvbn'
 
 import Button from '../../components/Button'
 import Card from '../../components/Card'
+import FormError from '../../components/FormError'
 import Logo from '../../components/Logo'
 import StyledInput from '../../components/TextField'
-import { H200, H600, Paragraph } from '../../components/Typography'
-import { variations } from '../../utils/variations'
-
-const CardContainer = styled.div`
-    height: 400px;
-    width: 400px;
-    margin-top: 48px;
-`
-
-const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-`
-
-const StyledForm = styled.form`
-    width: 100%;
-`
-
-const Header = styled.div`
-    display: flex;
-    width: 100%;
-    align-items: baseline;
-    justify-content: space-between;
-
-    > :first-child {
-        margin-right: 16px;
-    }
-`
-
-const Footer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: baseline;
-    margin-top: 36px;
-`
-
-const UnderlineContainer = styled.div`
-    display: inline-flex;
-    align-items: baseline;
-    margin-top: 36px;
-`
+import { H200, H600, Link, Paragraph } from '../../components/Typography'
+import { CardContainer, Container, Footer, Header, StyledForm, UnderlineContainer } from './style'
 
 const LOGIN = gql`
     mutation login($name: String!, $password: String!) {
@@ -63,7 +21,7 @@ const LOGIN = gql`
     }
 `
 
-function Auth() {
+function Register() {
     const [isLoggingIn, setIsLoggingIn] = useState(true)
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
@@ -84,21 +42,19 @@ function Auth() {
             <Logo />
             <CardContainer>
                 <Mutation mutation={LOGIN}>
-                    {(login, { data, loading, error }) =>
+                    {(submit, { data, loading, error }) =>
                         <Card>
                             <Header>
                                 <H600>Welcome</H600>
-                                <H200>
-                                    {isLoggingIn ? 'Connect to Teamy' : 'Register to teamy'}
-                                </H200>
+                                <H200>Register to Teamy</H200>
                             </Header>
                             <StyledForm>
+                                {error && <FormError message={error.graphQLErrors[0].message}/>}
                                 <StyledInput
                                     label='Name'
                                     onChange={({ target: { value } }: any) => setName(value)}
                                     value={name}
                                     placeholder='johndoe@example.com'
-                                    error={error && error.graphQLErrors[0] && error.graphQLErrors[0].message}
                                 />
                                 <StyledInput
                                     label='Password'
@@ -108,13 +64,12 @@ function Auth() {
                                 />
                             </StyledForm>
                             <Footer>
-                                {isLoggingIn && <Button variation={variations.LINK}>I forgot my password</Button>}
                                 <Button
                                     isLoading={loading}
-                                    onClick={() => login({ variables: { name, password } })}
+                                    onClick={() => submit({ variables: { name, password } })}
                                     isDisabled={password === '' || name === ''}
                                 >
-                                    {isLoggingIn ? 'Login' : 'Register'}
+                                    Login
                                 </Button>
                             </Footer>
                         </Card>}
@@ -122,17 +77,12 @@ function Auth() {
             </CardContainer>
             <UnderlineContainer>
                 <Paragraph>
-                    {isLoggingIn ? 'First time here?' : 'Already registered?'}
+                    First time there?
                 </Paragraph>
-                <Button 
-                    variation={variations.LINK}
-                    onClick={() => setIsLoggingIn(!isLoggingIn)}
-                >
-                    {isLoggingIn ? 'Create an account' : 'Login to your account'}
-                </Button>
+                <Link to='/login'>Connect to your account</Link>
             </UnderlineContainer>
         </Container>
     )
 }
 
-export default Auth
+export default Register
