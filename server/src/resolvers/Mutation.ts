@@ -16,7 +16,7 @@ const login = async (parent, { name, password }, context, info) => {
     const user = await context.prisma.user({ name })
 
     if (!user) {
-        throw new Error("User doesn't exists")
+        throw new Error("User doesn't exist")
     } 
 
     const passwordMatch = await bcrypt.compare(password, user.password)
