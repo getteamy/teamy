@@ -9,6 +9,7 @@ import Button from '../../components/Button'
 import Card from '../../components/Card'
 import FormError from '../../components/FormError'
 import Logo from '../../components/Logo'
+import PasswordStrengthMeter from '../../components/PasswordStrengthMeter'
 import StyledInput from '../../components/TextField'
 import { H200, H600, Link, Paragraph } from '../../components/Typography'
 import { CardContainer, Container, Footer, Header, StyledForm, UnderlineContainer } from './style'
@@ -22,17 +23,14 @@ const LOGIN = gql`
 `
 
 function Register() {
-    const [isLoggingIn, setIsLoggingIn] = useState(true)
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const [passwordStrength, setPasswordStrength] = useState(0)
 
     useEffect(
         () => {
-            if (!isLoggingIn) {
-                const strength = Number(zxcvbn(password).score.toFixed())
-                setPasswordStrength((strength !== 0 ? strength : 1))
-            }
+            const strength = Number(zxcvbn(password).score.toFixed())
+            setPasswordStrength(strength)
         }, [password],
     )
 
@@ -64,12 +62,16 @@ function Register() {
                                 />
                             </StyledForm>
                             <Footer>
+                                <PasswordStrengthMeter 
+                                    disabled={password === ''}
+                                    strength={passwordStrength}
+                                />
                                 <Button
                                     isLoading={loading}
                                     onClick={() => submit({ variables: { name, password } })}
-                                    isDisabled={password === '' || name === ''}
+                                    isDisabled={password === '' || name === '' || passwordStrength < 2}
                                 >
-                                    Login
+                                    Register
                                 </Button>
                             </Footer>
                         </Card>}
