@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@atlaskit/icon": "^16.0.5",
     "@atlaskit/theme": "^8.0.0",
     "@types/jest": "23.3.12",
     "@types/material-ui": "^0.21.6",
