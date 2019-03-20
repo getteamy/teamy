@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
-import { N200, N800 } from '../../utils/colors'
+import { Link as RouterLink } from 'react-router-dom'
+import { B100, B300, B400, N200, N800 } from '../../utils/colors'
 
 export const H900 = styled.p`
     font-weight: 500;
@@ -94,4 +95,33 @@ export const Small = styled.p`
     font-size: 11px;
     color: ${N200};
     line-height: 16px;
+`
+
+export const Link = styled(RouterLink)`
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.1px;
+    height: 40px;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    text-decoration: none;
+    line-height: 1;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    user-select: none;
+    color: ${B300};
+    padding: 0 8px;
+
+    :hover {
+        color: ${B100};
+    }
+
+    :active { 
+        color: ${B400};
+    }
 `
