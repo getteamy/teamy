@@ -16,8 +16,8 @@ import { CardContainer, Container, Footer, Header, StyledForm, UnderlineContaine
 
 const REGISTER = gql`
     mutation register($name: String!, $password: String!) {
-        register(name: $name, password: $password) {
-            token
+        signup(name: $name, password: $password) {
+            id
         }
     }
 `
