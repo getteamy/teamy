@@ -14,7 +14,8 @@ Here is the main repository of the Teamy webapp.
 
 ```
 cd server
-docker compose up -d # Start Postgres and the prisma containers
+prisma generate      # Generate db
+docker-compose up -d # Start Postgres and the prisma containers
 yarn                 # Install dependencies
 yarn start           # Spin-up the GraphQL server
 
