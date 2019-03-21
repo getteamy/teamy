@@ -34,7 +34,6 @@ function Register() {
         }, [password],
     )
 
-
     return (
         <Container>
             <Logo />
