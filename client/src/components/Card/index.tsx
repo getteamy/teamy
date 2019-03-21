@@ -10,7 +10,6 @@ const StyledCard = styled.div`
     padding: 40px;
     border-radius: 5px;
     width: 100%;
-    height: 100%;
 `
 
 interface StyledCardProps {

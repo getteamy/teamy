@@ -50,7 +50,9 @@ const Input = styled.input<StyledInputProps>`
 `
 
 const Container = styled.div`
-    margin-top: 32px;
+    margin: 16px 0 16px;
+    display: inline-block;
+    width: 100%;
 `
 
 const LabelContainer = styled.div`
