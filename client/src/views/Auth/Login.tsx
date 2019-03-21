@@ -37,8 +37,8 @@ function Login() {
                                 <H600>Welcome</H600>
                                 <H200>Connect to Teamy</H200>
                             </Header>
-                            <StyledForm onKeyDown={({key}) => key === 'Enter' && isValid && submit({ variables: { name, password } })}>
-                                {error && <FormError message={error.graphQLErrors[0].message}/>}
+                            <StyledForm>
+                                {error && error.graphQLErrors[0] && <FormError message={error.graphQLErrors[0].message}/>}
                                 <StyledInput
                                     label='Name'
                                     onChange={({ target: { value } }: any) => setName(value)}
