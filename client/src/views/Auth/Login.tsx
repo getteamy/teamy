@@ -24,6 +24,8 @@ function Login() {
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
 
+    const isValid = (password !== '' || name !== '')
+
     return (
         <Container>
             <Logo />
@@ -35,7 +37,7 @@ function Login() {
                                 <H600>Welcome</H600>
                                 <H200>Connect to Teamy</H200>
                             </Header>
-                            <StyledForm>
+                            <StyledForm onKeyDown={({key}) => key === 'Enter' && isValid && submit({ variables: { name, password } })}>
                                 {error && <FormError message={error.graphQLErrors[0].message}/>}
                                 <StyledInput
                                     label='Name'
@@ -55,7 +57,7 @@ function Login() {
                                 <Button
                                     isLoading={loading}
                                     onClick={() => submit({ variables: { name, password } })}
-                                    isDisabled={password === '' || name === ''}
+                                    isDisabled={!isValid}
                                 >
                                     Login
                                 </Button>

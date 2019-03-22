@@ -27,6 +27,8 @@ function Register() {
     const [password, setPassword] = useState('')
     const [passwordStrength, setPasswordStrength] = useState(0)
 
+    const isValid = (name !== '' && passwordStrength > 1)
+
     useEffect(
         () => {
             const strength = Number(zxcvbn(password).score.toFixed())
@@ -45,7 +47,7 @@ function Register() {
                                 <H600>Welcome</H600>
                                 <H200>Register to Teamy</H200>
                             </Header>
-                            <StyledForm>
+                            <StyledForm onKeyDown={({key}) => key === 'Enter' && isValid && submit({ variables: { name, password } })}>
                                 {error && <FormError message={error.graphQLErrors[0].message}/>}
                                 <StyledInput
                                     label='Name'
@@ -68,7 +70,7 @@ function Register() {
                                 <Button
                                     isLoading={loading}
                                     onClick={() => submit({ variables: { name, password } })}
-                                    isDisabled={password === '' || name === '' || passwordStrength < 2}
+                                    isDisabled={!isValid}
                                 >
                                     Register
                                 </Button>
