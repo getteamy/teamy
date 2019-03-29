@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon -e ts -w ./src -x ts-node ./src/index.ts",
+    "start:database": "docker-compose up -d",
     "generate:client": "prisma deploy && prisma generate",
     "generate:schema": "graphql get-schema --project prisma",
     "generate": "yarn generate:client && yarn generate:schema"

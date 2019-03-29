@@ -13,15 +13,8 @@ Here is the main repository of the Teamy webapp.
 ## Working on teamy
 
 ```
-cd server
-docker-compose up -d # Start Postgres and the prisma containers
 yarn                 # Install dependencies
-yarn generate        # Generate db
-yarn start           # Spin-up the GraphQL server
-
-cd client
-yarn                 # Install dependencies
-yarn start           # Start the webapp
+yarn start           # Starts : Postgres, Primsa Client, Server, Client
 ```
 
 ## Contribution
