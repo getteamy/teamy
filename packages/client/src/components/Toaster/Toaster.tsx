@@ -43,7 +43,7 @@ const Children = posed.div({
     transition: 'tween'
   },
   exit: {
-    y: -32,
+    y: -10,
     opacity: 0,
     transition: { duration: 150, ease: [0.4, 0.0, 1, 1] }
   }
