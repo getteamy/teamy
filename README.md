@@ -6,8 +6,9 @@ Here is the main repository of the Teamy webapp.
 
 ```
 .
-├── client             # Web application, wrote with React 
-├── server             # GraphQL server used by clients
+├── packages
+    ├── client             # Web application, wrote with React
+    ├── server             # GraphQL server used by clients
 ```
 
 ## Working on teamy
