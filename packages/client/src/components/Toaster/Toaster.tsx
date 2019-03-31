@@ -1,11 +1,11 @@
-import React from "react"
-import ReactDOM from "react-dom"
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import { PoseGroup } from "react-pose"
-import styled from "styled-components"
-import uuid from "uuid"
+import { PoseGroup } from 'react-pose'
+import styled from 'styled-components'
+import uuid from 'uuid'
 
-import Toast, { ToastProps } from "./Toast"
+import Toast, { ToastProps } from './Toast'
 
 interface ToasterInterface {
   show(props: ToastProps): string
@@ -15,7 +15,7 @@ interface ToasterInterface {
 type ToastOptions = ToastProps & { key: string }
 
 interface ToasterState {
-  toasts: any
+  toasts: ToastOptions[]
 }
 
 const Container = styled.div`
@@ -23,7 +23,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-end;
   z-index: 999;
-  overflow: hidden;
   position: fixed;
   right: 0;
   top: 0;
@@ -31,10 +30,10 @@ const Container = styled.div`
   box-sizing: border-box;
 `
 
-class Toaster extends React.PureComponent<any, ToasterState>
+class Toaster extends React.PureComponent<{}, ToasterState>
   implements ToasterInterface {
   public static create(container = document.body): ToasterInterface {
-    const containerElement = document.createElement("div")
+    const containerElement = document.createElement('div')
     container.appendChild(containerElement)
     const toaster = ReactDOM.render(<Toaster />, containerElement) as Toaster
     return toaster
