@@ -35,12 +35,7 @@ const Close = styled.div`
   }
 `
 
-const AnimationContainer = posed.div({
-  enter: { opacity: 1, delay: 300 },
-  exit: { opacity: 0, transition: { duration: 200 } }
-})
-
-const Container = styled(AnimationContainer)`
+const Container = styled.div`
   height: 48px;
   border-radius: 5px;
   background-color: ${R400};

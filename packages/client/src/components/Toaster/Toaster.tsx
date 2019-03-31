@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { PoseGroup } from 'react-pose'
 import styled from 'styled-components'
 import uuid from 'uuid'
 
 import Toast, { ToastProps } from './Toast'
+import posed, { PoseGroup } from 'react-pose'
 
 interface ToasterInterface {
   show(props: ToastProps): string
@@ -18,7 +18,7 @@ interface ToasterState {
   toasts: ToastOptions[]
 }
 
-const Container = styled.div`
+const Container = styled(posed.div())`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -26,9 +26,28 @@ const Container = styled.div`
   position: fixed;
   right: 0;
   top: 0;
+  min-width: 400px;
+  min-height: 200px;
   margin: 32px 32px 0;
   box-sizing: border-box;
 `
+
+const Children = posed.div({
+  enter: {
+    y: 0,
+    opacity: 1,
+    delay: 300,
+    transition: { duration: 225, ease: [0.4, 0.0, 0.2, 1] }
+  },
+  flip: {
+    transition: 'tween'
+  },
+  exit: {
+    y: -32,
+    opacity: 0,
+    transition: { duration: 150, ease: [0.4, 0.0, 1, 1] }
+  }
+})
 
 class Toaster extends React.PureComponent<{}, ToasterState>
   implements ToasterInterface {
@@ -62,13 +81,17 @@ class Toaster extends React.PureComponent<{}, ToasterState>
   public render() {
     return (
       <Container>
-        {this.state.toasts.map((toast: ToastOptions) => (
-          <Toast
-            {...toast}
-            key={toast.key}
-            onDismiss={() => this.dismiss(toast.key)}
-          />
-        ))}
+        <PoseGroup>
+          {this.state.toasts.map((toast: ToastOptions) => (
+            <Children key={toast.key}>
+              <Toast
+                {...toast}
+                key={toast.key}
+                onDismiss={() => this.dismiss(toast.key)}
+              />
+            </Children>
+          ))}
+        </PoseGroup>
       </Container>
     )
   }
