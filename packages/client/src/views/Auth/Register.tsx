@@ -93,8 +93,8 @@ function Register() {
         </Mutation>
       </CardContainer>
       <UnderlineContainer>
-        <Paragraph>First time there?</Paragraph>
-        <Link to="/login">Connect to your account</Link>
+        <Paragraph>Already have an account?</Paragraph>
+        <Link to="/login">Login</Link>
       </UnderlineContainer>
     </Container>
   )
