@@ -1,15 +1,15 @@
 {
-    "private": true,
-    "workspaces": ["client", "server"],
-    "scripts": {
-        "start": "yarn --cwd server start:database && yarn --cwd server generate & yarn --cwd server start & yarn --cwd client start"
-    },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "yarn --cwd packages/server start:database && yarn --cwd packages/server generate & yarn --cwd packages/server start & yarn --cwd packages/client start"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^1.5.0",
     "@typescript-eslint/parser": "^1.5.0",
-    "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-react": "^7.12.4",
     "prettier": "^1.16.4",
     "typescript": "^3.4.1"
   }
