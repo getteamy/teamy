@@ -50,14 +50,14 @@ function Login() {
                 )}
                 <StyledInput
                   label="Name"
-                  onChange={({ target: { value } }: any) => setName(value)}
+                  onChange={({ target: { value } }) => setName(value)}
                   value={name}
                   placeholder="johndoe@example.com"
                 />
                 <StyledInput
                   label="Password"
                   type="password"
-                  onChange={({ target: { value } }: any) => setPassword(value)}
+                  onChange={({ target: { value } }) => setPassword(value)}
                   value={password}
                 />
               </StyledForm>

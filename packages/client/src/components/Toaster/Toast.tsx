@@ -1,13 +1,13 @@
-import React from "react"
+import React from 'react'
 
-import CrossIcon from "@atlaskit/icon/glyph/cross"
-import ErrorIcon from "@atlaskit/icon/glyph/error"
-import posed from "react-pose"
-import styled from "styled-components"
+import CrossIcon from '@atlaskit/icon/glyph/cross'
+import ErrorIcon from '@atlaskit/icon/glyph/error'
+import posed from 'react-pose'
+import styled from 'styled-components'
 
-import { R300, R400 } from "../../utils/colors"
-import { easing } from "../../utils/easing"
-import { shadows } from "../../utils/shadows"
+import { R300, R400 } from '../../utils/colors'
+import { easing } from '../../utils/easing'
+import { shadows } from '../../utils/shadows'
 
 export interface ToastProps {
   message: string

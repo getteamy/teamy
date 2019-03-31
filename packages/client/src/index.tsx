@@ -14,35 +14,37 @@ import { AppToaster } from './components/Toaster'
 import Login from './views/Auth/Login'
 import Register from './views/Auth/Register'
 
-const errorLink = onError(({ graphQLErrors, networkError, response } : ErrorResponse) => {
-    if (graphQLErrors) graphQLErrors.map(({ message, locations, path }) => console.log(message))
+const errorLink = onError(
+  ({ graphQLErrors, networkError, response }: ErrorResponse) => {
+    if (graphQLErrors)
+      graphQLErrors.map(({ message, locations, path }) => message)
     if (networkError) {
-        AppToaster.show({message: networkError.message, onDismiss: ()=>true})
+      AppToaster.show({ message: networkError.message, onDismiss: () => true })
     }
-})
+  }
+)
 
 const uri = new HttpLink({
-    credentials: 'same-origin',
-    uri: 'http://localhost:4000/',
-  })
-
+  credentials: 'same-origin',
+  uri: 'http://localhost:4000/'
+})
 
 const client = new ApolloClient({
-    cache: new InMemoryCache(),
-    link: ApolloLink.from([errorLink, uri]),
+  cache: new InMemoryCache(),
+  link: ApolloLink.from([errorLink, uri])
 })
 
 function App() {
-    return (
-        <ApolloProvider client={client}>
-            <Router>
-                <Switch>
-                    <Route exact path='/login' component={Login} />
-                    <Route exact path='/register' component={Register} />
-                </Switch>
-            </Router>
-        </ApolloProvider>
-    )
+  return (
+    <ApolloProvider client={client}>
+      <Router>
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+        </Switch>
+      </Router>
+    </ApolloProvider>
+  )
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
