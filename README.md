@@ -20,7 +20,9 @@ yarn start           # Starts : Postgres, Primsa Client, Server, Client
 
 ## User flow
 
-<img src="https://i.imgur.com/c71Wka0.png" alt="diagram" align="center" width="500"/>
+<p align="center">
+    <img src="https://i.imgur.com/c71Wka0.png" alt="diagram" width="500"/>
+</p>
 
 ## Contribution
 
