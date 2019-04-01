@@ -18,6 +18,10 @@ yarn                 # Install dependencies
 yarn start           # Starts : Postgres, Primsa Client, Server, Client
 ```
 
+## User flow
+
+![Diagram](https://i.imgur.com/c71Wka0.png)
+
 ## Contribution
 
 Open PRs to the master branch. They will be reviewed shortly after.
