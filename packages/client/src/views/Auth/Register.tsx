@@ -20,6 +20,7 @@ import {
   StyledForm,
   UnderlineContainer
 } from './style'
+import { Redirect } from 'react-router'
 
 const REGISTER = gql`
   mutation register($name: String!, $password: String!) {
@@ -46,50 +47,58 @@ function Register() {
       <Logo />
       <CardContainer>
         <Mutation mutation={REGISTER}>
-          {(submit, { data, loading, error }) => (
-            <Card>
-              <Header>
-                <H600>Welcome</H600>
-                <H200>Register to Teamy</H200>
-              </Header>
-              <StyledForm
-                onKeyDown={({ key }) =>
-                  key === 'Enter' &&
-                  isValid &&
-                  submit({ variables: { name, password } })
-                }
-              >
-                {error && error.graphQLErrors[0] && (
-                  <FormError message={error.graphQLErrors[0].message} />
-                )}
-                <StyledInput
-                  label="Name"
-                  onChange={({ target: { value } }) => setName(value)}
-                  value={name}
-                  placeholder="johndoe@example.com"
-                />
-                <StyledInput
-                  label="Password"
-                  type="password"
-                  onChange={({ target: { value } }) => setPassword(value)}
-                  value={password}
-                />
-              </StyledForm>
-              <Footer>
-                <PasswordStrengthMeter
-                  disabled={password === ''}
-                  strength={passwordStrength}
-                />
-                <Button
-                  isLoading={loading}
-                  onClick={() => submit({ variables: { name, password } })}
-                  isDisabled={!isValid}
+          {(submit, { data, loading, error }) => {
+            const userCreated = data && data.signup.id
+
+            if (userCreated) {
+              return <Redirect to="register/skills" />
+            }
+
+            return (
+              <Card>
+                <Header>
+                  <H600>Welcome</H600>
+                  <H200>Register to Teamy</H200>
+                </Header>
+                <StyledForm
+                  onKeyDown={({ key }) =>
+                    key === 'Enter' &&
+                    isValid &&
+                    submit({ variables: { name, password } })
+                  }
                 >
-                  Register
-                </Button>
-              </Footer>
-            </Card>
-          )}
+                  {error && error.graphQLErrors[0] && (
+                    <FormError message={error.graphQLErrors[0].message} />
+                  )}
+                  <StyledInput
+                    label="Name"
+                    onChange={({ target: { value } }) => setName(value)}
+                    value={name}
+                    placeholder="johndoe@example.com"
+                  />
+                  <StyledInput
+                    label="Password"
+                    type="password"
+                    onChange={({ target: { value } }) => setPassword(value)}
+                    value={password}
+                  />
+                </StyledForm>
+                <Footer>
+                  <PasswordStrengthMeter
+                    disabled={password === ''}
+                    strength={passwordStrength}
+                  />
+                  <Button
+                    isLoading={loading}
+                    onClick={() => submit({ variables: { name, password } })}
+                    isDisabled={!isValid}
+                  >
+                    Register
+                  </Button>
+                </Footer>
+              </Card>
+            )
+          }}
         </Mutation>
       </CardContainer>
       <UnderlineContainer>
