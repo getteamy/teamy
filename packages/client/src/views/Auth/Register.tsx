@@ -93,7 +93,7 @@ function Register() {
                     onClick={() => submit({ variables: { name, password } })}
                     isDisabled={!isValid}
                   >
-                    Register
+                    Continue
                   </Button>
                 </Footer>
               </Card>
