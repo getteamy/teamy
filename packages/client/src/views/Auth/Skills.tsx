@@ -18,6 +18,8 @@ import {
   StyledForm,
   UnderlineContainer
 } from './style'
+import Select from '../../components/Select'
+import TagInput from '../../components/TagInput'
 
 const SET_SKILLS = gql`
   mutation setSkills($name: String!, $password: String!) {
@@ -46,11 +48,12 @@ function Skills() {
                 {error && error.graphQLErrors[0] && (
                   <FormError message={error.graphQLErrors[0].message} />
                 )}
-                <StyledInput
+                <Select
                   label="Gender"
                   onChange={() => true}
                   value={(male && 'male') || undefined}
-                  placeholder="johndoe@example.com"
+                  defaultValue="Choose your gender"
+                  options={['Male', 'Female', 'Other']}
                 />
                 <StyledInput
                   label="Age"
@@ -58,11 +61,7 @@ function Skills() {
                   onChange={() => true}
                   value={age.toString() || undefined}
                 />
-                <StyledInput
-                  label="Skills"
-                  onChange={() => true}
-                  value={age.toString() || undefined}
-                />
+                <TagInput label="Skills" />
               </StyledForm>
               <Footer>
                 <div />
@@ -71,7 +70,7 @@ function Skills() {
                   onClick={() => true}
                   isDisabled={!isValid}
                 >
-                  Login
+                  Register
                 </Button>
               </Footer>
             </Card>

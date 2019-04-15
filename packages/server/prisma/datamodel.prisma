@@ -2,4 +2,10 @@ type User {
   id: ID! @unique
   name: String! @unique
   password: String!
+  skills: [Skill!]
+}
+
+type Skill {
+  id: ID! @unique
+  name: String! @unique
 }
