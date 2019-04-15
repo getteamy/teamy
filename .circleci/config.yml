@@ -1,6 +1,9 @@
 version: 2
 jobs:
   build-client:
+    branches:
+      only:
+        - master
     machine: true
     steps:
       - checkout
@@ -11,6 +14,9 @@ jobs:
       - run: gcloud docker -- push eu.gcr.io/${GCP_PROJECT}/client:$CIRCLE_SHA1
 
   build-server:
+    branches:
+      only:
+        - master
     machine: true
     steps:
       - checkout
