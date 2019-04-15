@@ -9,4 +9,3 @@ spec:
     app: prisma
   ports:
   - port: 4466
-    targetPort: 4466
