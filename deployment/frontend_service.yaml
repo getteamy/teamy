@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: teamy
+    tier: frontend
+spec:
+  type: LoadBalancer
+  selector:
+    app: teamy
+    tier: frontend
+  ports:
+  - port: 80

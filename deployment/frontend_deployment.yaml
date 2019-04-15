@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      app: teamy
+  template:
+    metadata:
+      labels:
+        app: teamy
+        tier: frontend
+    spec:
+      containers:
+      - name: teamy
+        image: eu.gcr.io/teamy-237708/client:85e250ebbba12be5544d05f066ed7ce522adaeed
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80

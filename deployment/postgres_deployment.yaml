@@ -1,0 +1,46 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: database
+  labels:
+    stage: production
+    type: local
+    name: database
+    app: postgres
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        stage: production
+        name: database
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: 'postgres:10.5'
+          env:
+            - name: POSTGRES_USER
+              value: "prisma"
+            - name: POSTGRES_PASSWORD
+              value: "prisma"
+          resources:
+            requests:
+              memory: "10Mi"
+              cpu: "25m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - name: postgres-5432
+              containerPort: 5432
+          volumeMounts:
+            - name: database-disk
+              readOnly: false
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+      volumes:
+        - name: database-disk
+          persistentVolumeClaim:
+            claimName: database-disk
