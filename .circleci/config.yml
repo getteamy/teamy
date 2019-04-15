@@ -1,5 +1,11 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/node
+  build-client:
+    machine: true
+    steps:
+      - checkout
+      - run: echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
+      - run: docker build --rm=false -t eu.gcr.io/${GCP_PROJECT}/client:$CIRCLE_SHA1 ./packages/client
+      - run: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
+      - run: gcloud --quiet config set project ${GCP_PROJECT}
+      - run: gcloud docker -- push eu.gcr.io/${GCP_PROJECT}/client:$CIRCLE_SHA1
