@@ -26,6 +26,7 @@ const REGISTER = gql`
   mutation register($name: String!, $password: String!) {
     signup(name: $name, password: $password) {
       id
+      name
     }
   }
 `

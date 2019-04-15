@@ -1,5 +1,5 @@
 import { GraphQLServer } from 'graphql-yoga'
-import jwt from 'jsonwebtoken'
+import * as jwt from 'jsonwebtoken'
 
 import { prisma } from './generated/prisma-client'
 

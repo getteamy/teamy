@@ -3,7 +3,7 @@ import * as jwt from 'jsonwebtoken'
 
 const APP_SECRET = 'secret'
 
-const signup = async (parent, { name, password }, context, info) => {
+const signup = async (_, { name, password }, context) => {
   const exists = await context.prisma.user({ name })
 
   if (exists) {
@@ -18,7 +18,7 @@ const signup = async (parent, { name, password }, context, info) => {
   return user
 }
 
-const login = async (parent, { name, password }, context) => {
+const login = async (_, { name, password }, context) => {
   const user = await context.prisma.user({ name })
 
   if (!user) {
