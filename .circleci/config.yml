@@ -2,7 +2,8 @@ version: 2
 jobs:
   build-client:
     branches:
-      only: "master"
+      only:
+        - master
     machine: true
     steps:
       - checkout
@@ -14,7 +15,8 @@ jobs:
 
   build-server:
     branches:
-      only: "master"
+      only:
+        - master
     machine: true
     steps:
       - checkout
