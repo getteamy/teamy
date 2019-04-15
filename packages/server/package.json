@@ -11,12 +11,14 @@
     "generate": "yarn generate:client && yarn generate:schema"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "nodemon": "^1.18.8",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.2.2"
+    "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^8.3.2",
+    "eslint": "^5.16.0"
   },
   "dependencies": {
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2",
+    "nodemon": "^1.18.8",
     "bcryptjs": "^2.4.3",
     "graphql-yoga": "^1.16.7",
     "jsonwebtoken": "^8.4.0",

@@ -26,6 +26,7 @@ const REGISTER = gql`
   mutation register($name: String!, $password: String!) {
     signup(name: $name, password: $password) {
       id
+      name
     }
   }
 `
@@ -93,7 +94,7 @@ function Register() {
                     onClick={() => submit({ variables: { name, password } })}
                     isDisabled={!isValid}
                   >
-                    Register
+                    Continue
                   </Button>
                 </Footer>
               </Card>

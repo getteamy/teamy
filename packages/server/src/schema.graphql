@@ -1,13 +1,18 @@
 type Query {
-    user: User!
+  user: User!
 }
 type Mutation {
-    signup(name: String!, password: String!): User!
-    login(name: String!, password: String!): LoginResponse!
-    register(name: String!, password: String!): RegisterResponse!
+  signup(name: String!, password: String!): User!
+  login(name: String!, password: String!): LoginResponse!
 }
 
 type User {
+  id: ID!
+  name: String!
+  skills: [Skill!]
+}
+
+type Skill {
   id: ID!
   name: String!
 }
@@ -18,6 +23,5 @@ type LoginResponse {
 }
 
 type RegisterResponse {
-  token: String
   user: User
 }

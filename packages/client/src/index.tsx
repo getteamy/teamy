@@ -13,6 +13,7 @@ import './reset.css'
 import { AppToaster } from './components/Toaster'
 import Login from './views/Auth/Login'
 import Register from './views/Auth/Register'
+import Skills from './views/Auth/Skills'
 
 const errorLink = onError(
   ({ graphQLErrors, networkError, response }: ErrorResponse) => {
@@ -41,6 +42,7 @@ function App() {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/register/skills" component={Skills} />
         </Switch>
       </Router>
     </ApolloProvider>
