@@ -20,7 +20,7 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         env:
-          - name: ENV
-            value: production
+          - name: BackendUri
+            value: http://104.199.12.154:4000/
         ports:
         - containerPort: 80
