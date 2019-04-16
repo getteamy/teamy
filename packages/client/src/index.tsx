@@ -28,7 +28,7 @@ const errorLink = onError(
 const uri = new HttpLink({
   credentials: 'same-origin',
   uri:
-    (process.env.ENV === 'PRODUCTION' && 'http://104.199.12.154:4000') ||
+    (process.env.ENV === 'production' && 'http://104.199.12.154:4000') ||
     'http://localhost:4000/'
 })
 
