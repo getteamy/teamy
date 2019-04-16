@@ -25,11 +25,9 @@ const errorLink = onError(
   }
 )
 
-const backend = process.env.BackendUri || 'localhost:4000'
-
 const uri = new HttpLink({
   credentials: 'same-origin',
-  uri: backend
+  uri: process.env.BackendUri || 'http://localhost:4000'
 })
 
 const client = new ApolloClient({
