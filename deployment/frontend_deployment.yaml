@@ -20,7 +20,7 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         env:
-          - name: PORT
-            value: backend
+          - name: ENV
+            value: production
         ports:
         - containerPort: 80
