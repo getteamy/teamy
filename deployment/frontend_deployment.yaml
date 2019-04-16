@@ -14,10 +14,13 @@ spec:
     spec:
       containers:
       - name: teamy
-        image: eu.gcr.io/teamy-237708/client:85e250ebbba12be5544d05f066ed7ce522adaeed
+        image: eu.gcr.io/teamy-237708/client:65923c40d3fad2d3252fda3d9f9e964cf3e8ecb5
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        env:
+          - name: PORT
+            value: backend
         ports:
         - containerPort: 80
