@@ -25,7 +25,7 @@ const errorLink = onError(
   }
 )
 
-const backend = 'http://104.199.12.154:4000/'
+const backend = process.env.BackendUri || 'localhost:4000'
 
 const uri = new HttpLink({
   credentials: 'same-origin',
