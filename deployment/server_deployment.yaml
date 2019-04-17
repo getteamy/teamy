@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: teamy
-        image: eu.gcr.io/teamy-237708/server:latest
+        image: eu.gcr.io/${GOOGLE_PROJECT_ID}/server:${CIRCLE_SHA1}
         resources:
           limits:
             memory: "328Mi"

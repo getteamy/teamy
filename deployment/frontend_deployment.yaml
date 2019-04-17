@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: teamy
-        image: eu.gcr.io/teamy-237708/client:latest
+        image: eu.gcr.io/${GOOGLE_PROJECT_ID}/client:${CIRCLE_SHA1}
         resources:
           limits:
             memory: "128Mi"
