@@ -28,7 +28,8 @@ jobs:
       - run: 
           name: Deploy to Kubernetes
           command: |
-            envsubst < ${HOME}/deployment > ${HOME}/patched_deployment
+            envsubst < ./deployment/frontend_deployment.yaml > ./deployment/frontend_deployment.yaml
+            envsubst < ./deployment/server_deployment.yaml > ./deployment/server_deployment.yaml
             kubectl apply -f ./deployment
             kubectl rollout status deployment/teamy
 
