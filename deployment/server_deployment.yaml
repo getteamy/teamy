@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: teamy
-        image: eu.gcr.io/teamy-237708/server:196e1574c041ce823dfe23802ae51e178a1ae51c
+        image: eu.gcr.io/teamy-237708/server:latest
         resources:
           limits:
             memory: "328Mi"
