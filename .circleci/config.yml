@@ -25,7 +25,7 @@ jobs:
       - checkout
       - run: echo ${GOOGLE_AUTH_JSON} > ${HOME}/gcp-key.json
       - run: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
-      - run: sudo apt-get install -y kubectl
+      - run: sudo apt-get update && sudo apt-get install -y kubectl
       - run: kubectl apply -f ./deployment
 
 workflows:
