@@ -30,7 +30,7 @@ jobs:
           command: |
             envsubst < ${HOME}/deployment > ${HOME}/patched_deployment
             kubectl apply -f ${HOME}/deployment
-            kubectl rollout status deployment/${PROJECT_NAME}
+            kubectl rollout status deployment/teamy
 
 workflows:
   version: 2
