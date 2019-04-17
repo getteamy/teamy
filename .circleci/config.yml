@@ -19,12 +19,12 @@ jobs:
           name: Docker build and push client
           command: |
             docker build --rm=false -t eu.gcr.io/${GOOGLE_PROJECT_ID}/client:$CIRCLE_SHA1 ./packages/client
-            gcloud docker --verbosity=error -- push eu.gcr.io/${GCP_PROJECT}/client:$CIRCLE_SHA1
+            gcloud docker --verbosity=error -- push eu.gcr.io/${GOOGLE_PROJECT_ID}/client:$CIRCLE_SHA1
       - run: 
           name: Docker build and push server
           command: |
             docker build --rm=false -t eu.gcr.io/${GOOGLE_PROJECT_ID}/server:$CIRCLE_SHA1 ./packages/server
-            gcloud docker --verbosity=error -- push eu.gcr.io/${GCP_PROJECT}/server:$CIRCLE_SHA1
+            gcloud docker --verbosity=error -- push eu.gcr.io/${GOOGLE_PROJECT_ID}/server:$CIRCLE_SHA1
       - run: 
           name: Deploy to Kubernetes
           command: |
