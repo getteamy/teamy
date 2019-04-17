@@ -19,7 +19,7 @@ jobs:
       - run: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
       - run: gcloud --quiet config set project ${GCP_PROJECT}
       - run: gcloud docker -- push eu.gcr.io/${GCP_PROJECT}/server:$CIRCLE_SHA1
-  deploy-specs:
+  deploy:
     machine: true
     steps:
       - checkout
@@ -38,6 +38,11 @@ workflows:
               only:
               - master
       - build-server:
+          filters:
+            branches:
+              only:
+              - master
+      - deploy:
           filters:
             branches:
               only:
