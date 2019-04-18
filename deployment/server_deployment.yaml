@@ -17,7 +17,7 @@ spec:
         image: eu.gcr.io/${GOOGLE_PROJECT_ID}/server:${CIRCLE_SHA1}
         resources:
           limits:
-            memory: "328Mi"
+            memory: "128Mi"
             cpu: "500m"
         ports:
         - containerPort: 4000
