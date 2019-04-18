@@ -28,9 +28,9 @@ jobs:
       - run: 
           name: Deploy to Kubernetes
           command: |
-            envsubst < ./deployment/frontend_deployment.yaml > ./deployment_patched/frontend_deployment.yaml
-            envsubst < ./deployment/server_deployment.yaml > ./deployment_patched/server_deployment.yaml
-            kubectl apply -f ./deployment_patched
+            envsubst < ./deployment/frontend_deployment.yaml > ./deployment/frontend_deployment_patched.yaml
+            envsubst < ./deployment/server_deployment.yaml > ./deployment/server_deployment_patched.yaml
+            kubectl apply -f ./deployment
 
 workflows:
   version: 2
